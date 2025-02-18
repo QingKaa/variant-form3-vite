@@ -91,7 +91,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../../styles/global.scss"; /* form-item-wrapper已引入，还需要重复引入吗？ */
+  // @import "../../../../styles/global.scss"; /* form-item-wrapper已引入，还需要重复引入吗？ */
 
   .full-width-input {
     width: 100% !important;

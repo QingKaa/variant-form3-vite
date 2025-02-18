@@ -110,7 +110,7 @@
   }
 
   .table-container.selected {
-    outline: 2px solid $--color-primary !important;
+    outline: 2px solid var(--vForm-primary) !important;
   }
 
 </style>

@@ -224,7 +224,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../../../../styles/global.scss";
+  // @import "../../../../styles/global.scss";
 
   .design-time-bottom-margin {
     margin-bottom: 5px;
@@ -240,7 +240,7 @@
       right: -2px;
       height: 22px;
       line-height: 22px;
-      background: $--color-primary;
+      background: var(--vForm-primary);
       z-index: 9;
 
       i {
@@ -258,7 +258,7 @@
       left: -1px;
       height: 20px;
       line-height: 20px;
-      //background: $--color-primary;
+      //background: var(--vForm-primary);
       z-index: 9;
 
       i {
@@ -271,7 +271,7 @@
 
       &:hover {
         //opacity: 1;
-        background: $--color-primary;
+        background: var(--vForm-primary);
       }
     }
   }
@@ -332,7 +332,7 @@
   }
 
   .el-form-item.selected, .static-content-item.selected {
-    outline: 2px solid $--color-primary;
+    outline: 2px solid var(--vForm-primary);
   }
 
   :deep(.label-left-align) .el-form-item__label {

@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import viteSvgIcons from 'vite-plugin-svg-icons'
+import {createSvgIconsPlugin} from 'vite-plugin-svg-icons'
 import { resolve } from 'path'
 import commonjs from '@rollup/plugin-commonjs'
 import visualizer from 'rollup-plugin-visualizer'
@@ -21,7 +21,7 @@ export default defineConfig({
     //可视化Bundle
     visualizer(),
 
-    viteSvgIcons({
+    createSvgIconsPlugin({
       // Specify the icon folder to be cached
       iconDirs: [resolve(process.cwd(), 'src/icons/svg')],
       // Specify symbolId format
@@ -45,7 +45,9 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         /* 自动引入全局scss文件 */
-        additionalData: '@import "./src/styles/global.scss";'
+        // additionalData: '@import "./src/styles/global.scss";'
+        additionalData: '@use "@/styles/global.scss";',
+        api: 'modern-compiler'
       }
     }
   },

@@ -115,7 +115,7 @@
 
     li.ghost {
       background: #fff;
-      border: 2px dotted $--color-primary;
+      border: 2px dotted var(--vForm-primary);
     }
   }
 

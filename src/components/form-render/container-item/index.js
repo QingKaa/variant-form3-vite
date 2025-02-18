@@ -1,5 +1,5 @@
 
-const modules = import.meta.globEager('./*.vue')
+const modules = import.meta.glob('./*.vue', { eager: true})
 
 export default {
   install(app) {

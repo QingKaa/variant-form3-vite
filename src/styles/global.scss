@@ -1,8 +1,10 @@
 /* 全局css变量 */
-$--color-primary: #409EFF;
+:root{
+  --vForm-primary: #409EFF;
+}
 
 .primary-color {
-  color: $--color-primary;
+  color: var(--vForm-primary);
 }
 
 .background-opacity {
@@ -16,8 +18,8 @@ $--color-primary: #409EFF;
     font-size: 0;
     height: 3px;
     box-sizing: border-box;
-    background: $--color-primary;
-    border: 2px solid $--color-primary;
+    background: var(--vForm-primary);
+    border: 2px solid var(--vForm-primary);
     outline-width: 0;
     padding: 0;
     overflow: hidden;

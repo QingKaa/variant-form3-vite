@@ -350,10 +350,10 @@
 
         .container-widget-item:hover, .field-widget-item:hover {
           background: #F1F2F3;
-          border-color: $--color-primary;
+          border-color: var(--vForm-primary);
 
           .color-svg-icon {
-            color: $--color-primary;
+            color: var(--vForm-primary);
           }
         }
 

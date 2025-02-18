@@ -78,7 +78,7 @@
       right: -2px;
       height: 28px;
       line-height: 28px;
-      background: $--color-primary;
+      background: var(--vForm-primary);
       z-index: 999;
 
       i {
@@ -96,7 +96,7 @@
       left: -2px;
       height: 22px;
       line-height: 22px;
-      background: $--color-primary;
+      background: var(--vForm-primary);
       z-index: 9;
 
       i {

@@ -302,7 +302,7 @@
       right: -2px;
       height: 28px;
       line-height: 28px;
-      background: $--color-primary;
+      background: var(--vForm-primary);
       z-index: 999;
 
       display: flex;
@@ -323,7 +323,7 @@
       left: -2px;
       height: 22px;
       line-height: 22px;
-      background: $--color-primary;
+      background: var(--vForm-primary);
       z-index: 9;
 
       i {
@@ -345,6 +345,6 @@
   }
 
   .table-cell.selected {
-    outline: 2px solid $--color-primary !important;
+    outline: 2px solid var(--vForm-primary) !important;
   }
 </style>
