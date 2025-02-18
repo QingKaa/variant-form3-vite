@@ -200,6 +200,8 @@
   }
 
   .form-widget-container {
+    box-sizing: border-box;
+    height: 100%;
     padding: 10px;
     background: #f1f2f3;
 
@@ -207,6 +209,7 @@
     overflow-y: auto;
 
     .el-form.full-height-width {
+      box-sizing: border-box;
       height: 100%;
       padding: 3px;
       background: #ffffff;

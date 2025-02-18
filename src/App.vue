@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <VFormDesigner ref="vfDesignerRef" :global-dsv="globalDsv">
+    <VFormDesigner ref="vfDesignerRef" :global-dsv="globalDsv" class="v-from-designer">
       <!--
       <template #customToolButtons>
         <el-button type="text" @click="doTest">测试btn</el-button>
@@ -43,6 +43,9 @@ export default {
 
 <style lang="scss">
   #app {
+    height: 100%;
+  }
+  .v-from-designer{
     height: 100%;
   }
 </style>

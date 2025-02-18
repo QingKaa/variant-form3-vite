@@ -6,12 +6,12 @@
       <el-button link type="primary" :disabled="redoDisabled" :title="i18nt('designer.toolbar.redoHint')" @click="redoHistory">
         <svg-icon icon-class="redo" /></el-button>
       <el-button-group style="margin-left: 20px">
-        <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
+        <!-- <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
           {{i18nt('designer.toolbar.pcLayout')}}</el-button>
         <el-button :type="layoutType === 'Pad' ? 'info': ''" @click="changeLayoutType('Pad')">
           {{i18nt('designer.toolbar.padLayout')}}</el-button>
         <el-button :type="layoutType === 'H5' ? 'info': ''" @click="changeLayoutType('H5')">
-          {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
+          {{i18nt('designer.toolbar.mobileLayout')}}</el-button> -->
       </el-button-group>
       <el-button style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
         <svg-icon icon-class="node-tree" /></el-button>
@@ -29,7 +29,7 @@
           <svg-icon icon-class="el-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
         <el-button v-if="showToolButton('previewFormButton')" link type="primary" @click="previewForm">
           <svg-icon icon-class="el-view" />{{i18nt('designer.toolbar.preview')}}</el-button>
-        <el-button v-if="showToolButton('importJsonButton')" link type="primary" @click="importJson">
+        <!-- <el-button v-if="showToolButton('importJsonButton')" link type="primary" @click="importJson">
           {{i18nt('designer.toolbar.importJson')}}</el-button>
         <el-button v-if="showToolButton('exportJsonButton')" link type="primary" @click="exportJson">
           {{i18nt('designer.toolbar.exportJson')}}</el-button>
@@ -39,7 +39,7 @@
           <svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button>
         <template v-for="(idx, slotName) in $slots">
           <slot :name="slotName"></slot>
-        </template>
+        </template> -->
       </div>
     </div>
 
@@ -747,10 +747,11 @@
     line-height: 42px;
     text-align: right;
     overflow: hidden;
+    justify-content: flex-end;
 
     .right-toolbar-con {
       text-align: left;
-      width: 600px;
+      // width: 600px;
     }
 
     :deep(.el-button) {
