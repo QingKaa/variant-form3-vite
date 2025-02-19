@@ -5,6 +5,7 @@ import {createSvgIconsPlugin} from "vite-plugin-svg-icons";
 import { resolve } from "path";
 import commonjs from "@rollup/plugin-commonjs";
 import externalGlobals from "rollup-plugin-external-globals";
+import requireTransform from 'vite-plugin-require-transform';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,6 +14,8 @@ export default defineConfig({
     vue(),
     //添加jsx/tsx支持
     vueJsx({}),
+    commonjs({}),
+    requireTransform({}),
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
       iconDirs: [resolve(process.cwd(), "src/icons/svg")],

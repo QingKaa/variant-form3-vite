@@ -24,9 +24,9 @@
           <el-form-item :label="i18nt('designer.setting.labelWidth')">
             <el-input-number v-model="formConfig.labelWidth" :min="0" style="width: 100%"></el-input-number>
           </el-form-item>
-          <el-form-item :label="i18nt('designer.setting.formCss')">
+          <!-- <el-form-item :label="i18nt('designer.setting.formCss')">
             <el-button type="info" icon="el-icon-edit" plain round @click="editFormCss">{{ i18nt("designer.setting.addCss") }}</el-button>
-          </el-form-item>
+          </el-form-item> -->
           <!-- -->
           <el-form-item :label="i18nt('designer.setting.customClass')">
             <el-select v-model="formConfig.customClass" multiple filterable allow-create default-first-option>
@@ -34,9 +34,9 @@
             </el-select>
           </el-form-item>
           <!-- -->
-          <el-form-item :label="i18nt('designer.setting.globalFunctions')">
+          <!-- <el-form-item :label="i18nt('designer.setting.globalFunctions')">
             <el-button type="info" icon="el-icon-edit" plain round @click="editGlobalFunctions">{{ i18nt("designer.setting.addEventHandler") }}</el-button>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label-width="0">
             <el-divider class="custom-divider">{{ i18nt("designer.setting.formSFCSetting") }}</el-divider>
           </el-form-item>
@@ -51,25 +51,23 @@
           </el-form-item>
         </el-collapse-item>
 
-        <el-collapse-item v-if="showEventCollapse()" name="2" :title="i18nt('designer.setting.eventSetting')">
+        <!-- <el-collapse-item v-if="showEventCollapse()" name="2" :title="i18nt('designer.setting.eventSetting')">
           <el-form-item label="onFormCreated" label-width="150px">
             <el-button type="info" icon="el-icon-edit" plain round @click="editFormEventHandler('onFormCreated')"> {{ i18nt("designer.setting.addEventHandler") }}</el-button>
           </el-form-item>
           <el-form-item label="onFormMounted" label-width="150px">
             <el-button type="info" icon="el-icon-edit" plain round @click="editFormEventHandler('onFormMounted')"> {{ i18nt("designer.setting.addEventHandler") }}</el-button>
           </el-form-item>
-          <!-- -->
           <el-form-item label="onFormDataChange" label-width="150px">
             <el-button type="info" icon="el-icon-edit" plain round @click="editFormEventHandler('onFormDataChange')"> {{ i18nt("designer.setting.addEventHandler") }}</el-button>
           </el-form-item>
-          <!-- -->
-          <!--
+          
           <el-form-item label="onFormValidate">
             <el-button type="info" icon="el-icon-edit" plain round @click="editFormEventHandler('onFormValidate')">
               {{i18nt('designer.setting.addEventHandler')}}</el-button>
           </el-form-item>
-          -->
-        </el-collapse-item>
+         
+        </el-collapse-item> -->
       </el-collapse>
     </el-form>
 
@@ -85,7 +83,7 @@
         :destroy-on-close="true"
       >
         <el-alert type="info" :closable="false" :title="'form.' + eventParamsMap[curEventName]"></el-alert>
-        <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode" ref="ecEditor"></code-editor>
+        <!-- <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode" ref="ecEditor"></code-editor> -->
         <el-alert type="info" :closable="false" title="}"></el-alert>
         <template #footer>
           <div class="dialog-footer">
@@ -107,7 +105,7 @@
         :close-on-press-escape="false"
         :destroy-on-close="true"
       >
-        <code-editor :mode="'css'" :readonly="false" v-model="formCssCode"></code-editor>
+        <!-- <code-editor :mode="'css'" :readonly="false" v-model="formCssCode"></code-editor> -->
         <template #footer>
           <div class="dialog-footer">
             <el-button @click="showEditFormCssDialogFlag = false"> {{ i18nt("designer.hint.cancel") }}</el-button>
@@ -128,7 +126,7 @@
         :close-on-press-escape="false"
         :destroy-on-close="true"
       >
-        <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode" ref="gfEditor"></code-editor>
+        <!-- <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode" ref="gfEditor"></code-editor> -->
         <template #footer>
           <div class="dialog-footer">
             <el-button @click="showEditFunctionsDialogFlag = false"> {{ i18nt("designer.hint.cancel") }}</el-button>
@@ -142,14 +140,14 @@
 
 <script>
 import i18n from "@/utils/i18n";
-import CodeEditor from "@/components/code-editor/index";
+// import CodeEditor from "@/components/code-editor/index";
 import { deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml } from "@/utils/util";
 
 export default {
   name: "form-setting",
   mixins: [i18n],
   components: {
-    CodeEditor,
+    // CodeEditor,
   },
   props: {
     designer: Object,

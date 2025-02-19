@@ -78,7 +78,7 @@
                  :show-close="true" class="drag-dialog small-padding-dialog" :append-to-body="true" center
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-alert type="info" :title="i18nt('designer.hint.importJsonHint')" show-icon class="alert-padding"></el-alert>
-        <code-editor :mode="'json'" :readonly="false" v-model="importTemplate"></code-editor>
+        <!-- <code-editor :mode="'json'" :readonly="false" v-model="importTemplate"></code-editor> -->
         <template #footer>
           <div class="dialog-footer">
             <el-button type="primary" @click="doJsonImport">
@@ -94,7 +94,7 @@
       <el-dialog :title="i18nt('designer.toolbar.exportJson')" v-model="showExportJsonDialogFlag"
                  :show-close="true" class="drag-dialog small-padding-dialog" center append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-        <code-editor :mode="'json'" :readonly="true" v-model="jsonContent"></code-editor>
+        <!-- <code-editor :mode="'json'" :readonly="true" v-model="jsonContent"></code-editor> -->
         <template #footer>
           <div class="dialog-footer">
             <el-button type="primary" class="copy-json-btn" :data-clipboard-text="jsonRawContent" @click="copyFormJson">
@@ -113,10 +113,10 @@
                  width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeCodeTab">
           <el-tab-pane label="Vue" name="vue">
-            <code-editor :mode="'html'" :readonly="true" v-model="vueCode" :user-worker="false"></code-editor>
+            <!-- <code-editor :mode="'html'" :readonly="true" v-model="vueCode" :user-worker="false"></code-editor> -->
           </el-tab-pane>
           <el-tab-pane label="HTML" name="html">
-            <code-editor :mode="'html'" :readonly="true" v-model="htmlCode" :user-worker="false"></code-editor>
+            <!-- <code-editor :mode="'html'" :readonly="true" v-model="htmlCode" :user-worker="false"></code-editor> -->
           </el-tab-pane>
         </el-tabs>
         <template #footer>
@@ -140,7 +140,7 @@
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true"
                  :append-to-body="true">
         <div style="border: 1px solid #DCDFE6">
-          <code-editor :mode="'json'" :readonly="true" v-model="formDataJson"></code-editor>
+          <!-- <code-editor :mode="'json'" :readonly="true" v-model="formDataJson"></code-editor> -->
         </div>
         <template #footer>
           <div class="dialog-footer">
@@ -160,10 +160,10 @@
                  width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
         <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeSFCTab">
           <el-tab-pane label="Vue2" name="vue2">
-            <code-editor :mode="'html'" :readonly="true" v-model="sfcCode" :user-worker="false"></code-editor>
+            <!-- <code-editor :mode="'html'" :readonly="true" v-model="sfcCode" :user-worker="false"></code-editor> -->
           </el-tab-pane>
           <el-tab-pane label="Vue3" name="vue3">
-            <code-editor :mode="'html'" :readonly="true" v-model="sfcCodeV3" :user-worker="false"></code-editor>
+            <!-- <code-editor :mode="'html'" :readonly="true" v-model="sfcCodeV3" :user-worker="false"></code-editor> -->
           </el-tab-pane>
         </el-tabs>
         <template #footer>
@@ -186,7 +186,7 @@
 
 <script>
   import VFormRender from '@/components/form-render/index'
-  import CodeEditor from '@/components/code-editor/index'
+  // import CodeEditor from '@/components/code-editor/index'
   import Clipboard from 'clipboard'
   import {
     deepClone,
@@ -208,7 +208,7 @@
     mixins: [i18n],
     components: {
       VFormRender,
-      CodeEditor,
+      // CodeEditor,
       Clipboard,
       SvgIcon,
     },

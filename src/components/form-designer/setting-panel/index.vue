@@ -61,7 +61,7 @@
                   </template>
                 </el-collapse-item>
                 <!-- 事件属性 -->
-                <el-collapse-item
+                <!-- <el-collapse-item
                   name="3"
                   v-if="showEventCollapse() && showCollapse(eventProps)"
                   :title="i18nt('designer.setting.eventSetting')"
@@ -75,7 +75,7 @@
                       :option-model="optionModel"
                     ></component>
                   </template>
-                </el-collapse-item>
+                </el-collapse-item> -->
               </el-collapse>
             </el-form>
           </template>
@@ -189,12 +189,12 @@
         :destroy-on-close="true"
       >
         <el-alert type="info" :closable="false" :title="eventHeader"></el-alert>
-        <code-editor
+        <!-- <code-editor
           :mode="'javascript'"
           :readonly="false"
           v-model="eventHandlerCode"
           ref="ecEditor"
-        ></code-editor>
+        ></code-editor> -->
         <el-alert type="info" :closable="false" title="}"></el-alert>
         <template #footer>
           <div class="dialog-footer">
@@ -212,7 +212,7 @@
 </template>
 
 <script>
-import CodeEditor from "@/components/code-editor/index";
+// import CodeEditor from "@/components/code-editor/index";
 import PropertyEditors from "./property-editor/index";
 import FormSetting from "./form-setting";
 import WidgetProperties from "./propertyRegister";
@@ -230,7 +230,7 @@ export default {
   componentName: "SettingPanel",
   mixins: [i18n, emitter],
   components: {
-    CodeEditor,
+    // CodeEditor,
     FormSetting,
     ...PropertyEditors,
   },

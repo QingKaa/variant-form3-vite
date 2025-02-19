@@ -71,7 +71,7 @@
       <el-dialog :title="i18nt('designer.setting.importOptions')" v-model="showImportCascaderDialogFlag"
                  :show-close="true" class="drag-dialog small-padding-dialog" append-to-body
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-        <code-editor v-model="cascaderOptions" mode="json" :readonly="false"></code-editor>
+        <!-- <code-editor v-model="cascaderOptions" mode="json" :readonly="false"></code-editor> -->
         <template #footer>
           <div class="dialog-footer">
             <el-button size="large" type="primary" @click="saveCascaderOptions">{{i18nt('designer.hint.confirm')}}</el-button>
@@ -85,14 +85,14 @@
 </template>
 
 <script>
-  import CodeEditor from '@/components/code-editor/index'
+  // import CodeEditor from '@/components/code-editor/index'
   import i18n from "@/utils/i18n";
 
   export default {
     name: "OptionItemsSetting",
     mixins: [i18n],
     components: {
-      CodeEditor,
+      // CodeEditor,
     },
     props: {
       designer: Object,
