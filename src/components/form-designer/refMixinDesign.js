@@ -1,7 +1,7 @@
 export default {
   methods: {
     initRefList() {
-      if ((this.refList !== null) && !!this.widget.options.name) {
+      if ((this.refList !== null) && !!this.widget && !!this.widget.options.name) {
         this.refList[this.widget.options.name] = this
       }
     },
@@ -16,7 +16,7 @@ export default {
 
     /* 该方法用于组件重名检查！！ */
     registerToRefList(oldRefName) {
-      if ((this.refList !== null) && !!this.widget.options.name) {
+      if ((this.refList !== null) && !!this.widget && !!this.widget.options.name) {
         if (!!oldRefName) {
           delete this.refList[oldRefName]
         }

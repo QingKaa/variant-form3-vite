@@ -1,7 +1,7 @@
 export default {
   methods: {
     initRefList() {
-      if ((this.refList !== null) && !!this.widget.options.name) {
+      if ((this.refList !== null) && !!this.widget && !!this.widget.options.name) {
         this.refList[this.widget.options.name] = this
       }
     },

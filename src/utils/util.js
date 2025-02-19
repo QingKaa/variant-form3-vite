@@ -1,4 +1,4 @@
-// import ClipboardJs from 'clipboard'
+import Clipboard from 'clipboard'
 
 export function isNull(value) {
   return (value === null) || (value === undefined);
@@ -318,7 +318,7 @@ export function getAllContainerWidgets(widgetList) {
 }
 
 export function copyToClipboard(content, clickEvent, $message, successMsg, errorMsg) {
-  const clipboard = new ClipboardJs(clickEvent.target, {
+  const clipboard = new Clipboard(clickEvent.target, {
     text: () => content
   })
 

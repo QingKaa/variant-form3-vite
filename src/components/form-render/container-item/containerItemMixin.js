@@ -21,7 +21,7 @@ export default {
 
   methods: {
     unregisterFromRefList() {  //销毁容器组件时注销组件ref
-      if ((this.refList !== null) && !!this.widget.options.name) {
+      if ((this.refList !== null) && !!this.widget && !!this.widget.options.name) {
         let oldRefName = this.widget.options.name
         delete this.refList[oldRefName]
       }

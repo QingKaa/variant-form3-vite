@@ -118,7 +118,7 @@
   }
 
   .tab-container.selected {
-    outline: 2px solid var(--vForm-primary) !important;
+    outline: 2px solid var(--vf-primary) !important;
   }
 
 </style>

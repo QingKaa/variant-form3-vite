@@ -277,14 +277,13 @@
 </script>
 
 <style lang="scss" scoped>
-  // @import "../../../../styles/global.scss"; /* form-item-wrapper已引入，还需要重复引入吗？ */
 
   .full-width-input {
     width: 100% !important;
   }
 
   .dynamicPseudoAfter :deep(.el-upload.el-upload--text) {
-    color: var(--vForm-primary);
+    color: var(--vf-primary);
     font-size: 12px;
     .el-icon-plus:after {
       content: var(--select-file-action);
@@ -309,7 +308,7 @@
     font-size: 12px;
 
     .file-action {
-      color: var(--vForm-primary);
+      color: var(--vf-primary);
       margin-left: 5px;
       margin-right: 5px;
       cursor: pointer;

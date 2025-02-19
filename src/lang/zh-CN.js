@@ -307,9 +307,6 @@ export default {
 
       widgetName: '组件唯一名称',
       formSize: '全局组件大小',
-      formSizeLarge:'大',
-      formSizeDefault: '默认',
-      formSizeSmall: '小',
       labelPosition: '标签位置',
       topPosition: '顶部',
       leftPosition: '左边',

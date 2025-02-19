@@ -3,10 +3,11 @@ import axios from 'axios'
 import VFormDesigner from '@/components/form-designer/index.vue'
 import VFormRender from '@/components/form-render/index.vue'
 
-import * as Draggable from '@/../lib/vuedraggable/dist/vuedraggable.umd.js'
+import Draggable from '@/../lib/vuedraggable/dist/vuedraggable.umd.js'
 import {registerIcon} from '@/utils/el-icons'
 import 'virtual:svg-icons-register'
 import '@/iconfont/iconfont.css'
+import "@/styles/cssVar.css"
 
 import ContainerWidgets from '@/components/form-designer/form-widget/container-widget/index'
 import ContainerItems from '@/components/form-render/container-item/index'

@@ -14,30 +14,30 @@ export const containers = [
     }
   },
 
-  // {
-  //   type: 'table',
-  //   category: 'container',
-  //   icon: 'table',
-  //   rows: [],
-  //   options: {
-  //     name: '',
-  //     hidden: false,
-  //     customClass: '',  //自定义css类名
-  //   }
-  // },
+  {
+    type: 'table',
+    category: 'container',
+    icon: 'table',
+    rows: [],
+    options: {
+      name: '',
+      hidden: false,
+      customClass: '',  //自定义css类名
+    }
+  },
 
-  // {
-  //   type: 'tab',
-  //   category: 'container',
-  //   icon: 'tab',
-  //   displayType: 'border-card',
-  //   tabs: [],
-  //   options: {
-  //     name: '',
-  //     hidden: false,
-  //     customClass: '',  //自定义css类名
-  //   }
-  // },
+  {
+    type: 'tab',
+    category: 'container',
+    icon: 'tab',
+    displayType: 'border-card',
+    tabs: [],
+    options: {
+      name: '',
+      hidden: false,
+      customClass: '',  //自定义css类名
+    }
+  },
 
   {
     type: 'grid-col',
@@ -60,39 +60,39 @@ export const containers = [
     }
   },
 
-  // {
-  //   type: 'table-cell',
-  //   category: 'container',
-  //   icon: 'table-cell',
-  //   internal: true,
-  //   widgetList: [],
-  //   merged: false,
-  //   options: {
-  //     name: '',
-  //     cellWidth: '',
-  //     cellHeight: '',
-  //     colspan: 1,
-  //     rowspan: 1,
-  //     wordBreak: false,  //是否自动换行
-  //     customClass: '',  //自定义css类名
-  //   }
-  // },
+  {
+    type: 'table-cell',
+    category: 'container',
+    icon: 'table-cell',
+    internal: true,
+    widgetList: [],
+    merged: false,
+    options: {
+      name: '',
+      cellWidth: '',
+      cellHeight: '',
+      colspan: 1,
+      rowspan: 1,
+      wordBreak: false,  //是否自动换行
+      customClass: '',  //自定义css类名
+    }
+  },
 
-  // {
-  //   type: 'tab-pane',
-  //   category: 'container',
-  //   icon: 'tab-pane',
-  //   internal: true,
-  //   widgetList: [],
-  //   options: {
-  //     name: '',
-  //     label: '',
-  //     hidden: false,
-  //     active: false,
-  //     disabled: false,
-  //     customClass: '',  //自定义css类名
-  //   }
-  // },
+  {
+    type: 'tab-pane',
+    category: 'container',
+    icon: 'tab-pane',
+    internal: true,
+    widgetList: [],
+    options: {
+      name: '',
+      label: '',
+      hidden: false,
+      active: false,
+      disabled: false,
+      customClass: '',  //自定义css类名
+    }
+  },
 
 
 ]
@@ -623,43 +623,43 @@ export const basicFields = [
     },
   },
 
-  // {
-  //   type: 'slider',
-  //   icon: 'slider-field',
-  //   formItemFlag: true,
-  //   options: {
-  //     name: '',
-  //     label: '',
-  //     labelAlign: '',
-  //     columnWidth: '200px',
-  //     showStops: true,
-  //     size: '',
-  //     labelWidth: null,
-  //     labelHidden: false,
-  //     disabled: false,
-  //     hidden: false,
-  //     required: false,
-  //     requiredHint: '',
-  //     validation: '',
-  //     validationHint: '',
-  //     //-------------------
-  //     customClass: '',  //自定义css类名
-  //     labelIconClass: null,
-  //     labelIconPosition: 'rear',
-  //     labelTooltip: null,
-  //     min: 0,
-  //     max: 100,
-  //     step: 10,
-  //     range: false,
-  //     //vertical: false,
-  //     height: null,
-  //     //-------------------
-  //     onCreated: '',
-  //     onMounted: '',
-  //     onChange: '',
-  //     onValidate: '',
-  //   },
-  // },
+  {
+    type: 'slider',
+    icon: 'slider-field',
+    formItemFlag: true,
+    options: {
+      name: '',
+      label: '',
+      labelAlign: '',
+      columnWidth: '200px',
+      showStops: true,
+      size: '',
+      labelWidth: null,
+      labelHidden: false,
+      disabled: false,
+      hidden: false,
+      required: false,
+      requiredHint: '',
+      validation: '',
+      validationHint: '',
+      //-------------------
+      customClass: '',  //自定义css类名
+      labelIconClass: null,
+      labelIconPosition: 'rear',
+      labelTooltip: null,
+      min: 0,
+      max: 100,
+      step: 10,
+      range: false,
+      //vertical: false,
+      height: null,
+      //-------------------
+      onCreated: '',
+      onMounted: '',
+      onChange: '',
+      onValidate: '',
+    },
+  },
 
   {
     type: 'static-text',
@@ -681,48 +681,48 @@ export const basicFields = [
     },
   },
 
-  // {
-  //   type: 'html-text',
-  //   icon: 'html-text',
-  //   formItemFlag: false,
-  //   options: {
-  //     name: '',
-  //     columnWidth: '200px',
-  //     hidden: false,
-  //     htmlContent: '<b>html text</b>',
-  //     //-------------------
-  //     customClass: '',  //自定义css类名
-  //     //-------------------
-  //     onCreated: '',
-  //     onMounted: '',
-  //   },
-  // },
+  {
+    type: 'html-text',
+    icon: 'html-text',
+    formItemFlag: false,
+    options: {
+      name: '',
+      columnWidth: '200px',
+      hidden: false,
+      htmlContent: '<b>html text</b>',
+      //-------------------
+      customClass: '',  //自定义css类名
+      //-------------------
+      onCreated: '',
+      onMounted: '',
+    },
+  },
 
-  // {
-  //   type: 'button',
-  //   icon: 'button',
-  //   formItemFlag: false,
-  //   options: {
-  //     name: '',
-  //     label: '',
-  //     columnWidth: '200px',
-  //     size: '',
-  //     displayStyle: 'block',
-  //     disabled: false,
-  //     hidden: false,
-  //     type: '',
-  //     plain: false,
-  //     round: false,
-  //     circle: false,
-  //     icon: null,
-  //     //-------------------
-  //     customClass: '',  //自定义css类名
-  //     //-------------------
-  //     onCreated: '',
-  //     onMounted: '',
-  //     onClick: '',
-  //   },
-  // },
+  {
+    type: 'button',
+    icon: 'button',
+    formItemFlag: false,
+    options: {
+      name: '',
+      label: '',
+      columnWidth: '200px',
+      size: '',
+      displayStyle: 'block',
+      disabled: false,
+      hidden: false,
+      type: '',
+      plain: false,
+      round: false,
+      circle: false,
+      icon: null,
+      //-------------------
+      customClass: '',  //自定义css类名
+      //-------------------
+      onCreated: '',
+      onMounted: '',
+      onClick: '',
+    },
+  },
 
   {
     type: 'divider',

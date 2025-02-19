@@ -307,9 +307,6 @@ export default {
 
       widgetName: 'Unique Name',
       formSize: 'Size',
-      formSizeLarge:'Large',
-      formSizeDefault: 'Default',
-      formSizeSmall: 'Small',
       labelPosition: 'Position Of Label',
       topPosition: 'Top',
       leftPosition: 'Left',

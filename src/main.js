@@ -3,7 +3,10 @@ import axios from 'axios'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import "@/styles/cssVar.css"
 import '@/styles/index.scss'
+import "@/styles/global.scss"
+
 import '@/iconfont/iconfont.css'
 import Draggable from '@/../lib/vuedraggable/dist/vuedraggable.umd.js'
 import {registerIcon} from '@/utils/el-icons'
