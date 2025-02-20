@@ -214,7 +214,7 @@ export const basicFields = [
       max: 100000000000,
       precision: 0,
       step: 1,
-      controlsPosition: "right",
+      controlsPosition: "",
       //-------------------
       onCreated: "",
       onMounted: "",

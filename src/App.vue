@@ -26,7 +26,7 @@ export default {
         testPort: 8080,
       },
 
-      bannedWidgets:['table','rate', 'card','html', 'button', 'rich-editor', 'html-text'],
+      bannedWidgets:['table','rate', 'html', 'button', 'rich-editor', 'html-text'],
       designerConfig:{
         eventCollapse: false,
         formTemplates: true,

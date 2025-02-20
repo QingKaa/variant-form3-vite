@@ -3,6 +3,7 @@ export default {
     widgetLabel: {
       card: 'Card',
       alert: 'Alert',
+      title: 'Title',
     },
 
     setting: {
@@ -20,6 +21,12 @@ export default {
       showIcon: 'Show Icon',
       effect: 'Effect',
 
+      textAlign: 'Text Align',
+      fontSize: 'Font Size',
+      textColor: 'Text Color',
+      bgColor: 'Bg Color',
+
+      titleIsActive: 'Attach'
     },
 
   }

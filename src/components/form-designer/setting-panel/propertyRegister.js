@@ -59,7 +59,7 @@ const COMMON_PROPERTIES = {
   'fileTypes'         :            'fileTypes-editor',
   'contentHeight'     :            'contentHeight-editor',
   'customClass'       :            'customClass-editor',
-
+  'controlsPosition'  :            'controlsPosition-editor',
   //容器
   'showBlankRow'       :            'showBlankRow-editor',
   'showRowNumber'      :            'showRowNumber-editor',
@@ -81,7 +81,6 @@ const ADVANCED_PROPERTIES = {
   'max'               :            'max-editor',
   'precision'         :            'precision-editor',
   'step'              :            'step-editor',
-  'controlsPosition'  :            'controlsPosition-editor',
   'minLength'         :            'minLength-editor',
   'maxLength'         :            'maxLength-editor',
   'showWordLimit'     :            'showWordLimit-editor',

@@ -171,3 +171,18 @@ export const createEmptyEditor = function () {
   }
 }
 
+export const createColorPickerEditor = function (propName, propLabelKey) {
+  return {
+    props: {
+      optionModel: Object,
+    },
+    render(h) {
+      return (
+        <el-form-item label={translate(propLabelKey)}>
+          <el-color-picker v-model={this.optionModel[propName]} />
+        </el-form-item>
+      )
+    }
+  }
+}
+

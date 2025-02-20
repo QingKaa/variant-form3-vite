@@ -59,6 +59,7 @@ export default {
       slot:             '插槽',
 
       custom:           'Custom Component',
+
     },
 
     hint: {

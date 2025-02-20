@@ -3,6 +3,7 @@ export default {
     widgetLabel: {
       card: '卡片',
       alert: '提示',
+      title: '标题',  
     },
 
     setting: {
@@ -20,6 +21,12 @@ export default {
       showIcon: '显示图标',
       effect: '显示效果',
 
+      textAlign: '对齐方式',
+      fontSize: '字体大小',
+      textColor: '字体颜色',
+      bgColor: '背景色',
+
+      titleIsActive: '附加样式'
     },
 
   }

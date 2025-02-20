@@ -107,6 +107,7 @@
 
     :deep(.el-range-editor) {
       width: 100% !important;
+      box-sizing: border-box;
     }
   }
 

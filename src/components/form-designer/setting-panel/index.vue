@@ -1,26 +1,26 @@
 <template>
   <el-container class="panel-container">
     <el-tabs v-model="activeTab" style="height: 100%; width: 100%; overflow: hidden">
-      <el-tab-pane :label="i18nt('designer.hint.widgetSetting')" name="1" style="height:100%;">
-        <el-scrollbar class="setting-scrollbar" >
+      <el-tab-pane :label="i18nt('designer.hint.widgetSetting')" name="1" style="height: 100%">
+        <el-scrollbar class="setting-scrollbar">
           <template v-if="!!designer.selectedWidget && !designer.selectedWidget.category">
             <el-form :model="optionModel" size="small" label-position="left" label-width="120px" class="setting-form" @submit.prevent>
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
                 <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">
-                  <template v-for="(editorName, propName) in commonProps">
-                    <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                  <template v-for="(editorName, propName) in activeCommon">
+                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
                 <el-collapse-item name="2" v-if="showCollapse(advProps)" :title="i18nt('designer.setting.advancedSetting')">
-                  <template v-for="(editorName, propName) in advProps">
-                    <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                  <template v-for="(editorName, propName) in activeAdvProps">
+                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
                 <el-collapse-item name="3" v-if="showEventCollapse() && showCollapse(eventProps)" :title="i18nt('designer.setting.eventSetting')">
-                  <template v-for="(editorName, propName) in eventProps">
-                    <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                  <template v-for="(editorName, propName) in activeEventProps">
+                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
               </el-collapse>
@@ -31,20 +31,20 @@
             <el-form :model="optionModel" size="small" label-position="left" label-width="120px" class="setting-form" @submit.prevent>
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
                 <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">
-                  <template v-for="(editorName, propName) in commonProps">
-                    <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                  <template v-for="(editorName, propName) in activeCommon">
+                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
                 <el-collapse-item name="2" v-if="showCollapse(advProps)" :title="i18nt('designer.setting.advancedSetting')">
-                  <template v-for="(editorName, propName) in advProps">
-                    <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                  <template v-for="(editorName, propName) in activeAdvProps">
+                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
                 <el-collapse-item name="3" v-if="showEventCollapse() && showCollapse(eventProps)" :title="i18nt('designer.setting.eventSetting')">
-                  <template v-for="(editorName, propName) in eventProps">
-                    <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                  <template v-for="(editorName, propName) in activeEventProps">
+                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
               </el-collapse>
@@ -54,7 +54,7 @@
       </el-tab-pane>
 
       <el-tab-pane v-if="!!designer" :label="i18nt('designer.hint.formSetting')" name="2">
-        <el-scrollbar class="setting-scrollbar" >
+        <el-scrollbar class="setting-scrollbar">
           <form-setting :designer="designer" :form-config="formConfig"></form-setting>
         </el-scrollbar>
       </el-tab-pane>
@@ -149,6 +149,33 @@ export default {
         this.selectedWidget.options = newValue;
       },
     },
+    activeCommon() {
+      return Object.keys(this.commonProps).reduce((obj, propName) => {
+        if (propName === "customClass") return obj;
+        if (this.commonProps[propName] && this.hasPropEditor(propName, this.commonProps[propName])) {
+          obj[propName] = this.commonProps[propName];
+        }
+        return obj;
+      }, {});
+    },
+    activeAdvProps() {
+      return Object.keys(this.advProps).reduce((obj, propName) => {
+        if (propName === "customClass") return obj;
+        if (this.advProps[propName] && this.hasPropEditor(propName, this.advProps[propName])) {
+          obj[propName] = this.advProps[propName];
+        }
+        return obj;
+      }, {});
+    },
+    activeEventProps() {
+      return Object.keys(this.eventProps).reduce((obj, propName) => {
+        if (propName === "customClass") return obj;
+        if (this.eventProps[propName] && this.hasPropEditor(propName, this.eventProps[propName])) {
+          obj[propName] = this.eventProps[propName];
+        }
+        return obj;
+      }, {});
+    },
   },
   watch: {
     "designer.selectedWidget": {
@@ -190,7 +217,7 @@ export default {
     } else {
       this.activeTab = "1";
     }
-
+    console.log("  =====> commonProps:", this.commonProps);
     // this.scrollerHeight = window.innerHeight - 56 - 48 + 'px'
     // addWindowResizeHandler(() => {
     //   this.$nextTick(() => {
@@ -297,6 +324,7 @@ export default {
   box-sizing: border-box;
   padding: 0 8px;
   height: 100%;
+  background: #fff;
 }
 
 .setting-scrollbar {
