@@ -35,7 +35,7 @@ export default {
 
       input:          '单行输入',
       textarea:       '多行输入',
-      number:         '计数器',
+      number:         '数字输入',
       radio:          '单选项',
       checkbox:       '多选项',
       select:         '下拉选项',
@@ -52,8 +52,8 @@ export default {
       button:         '按钮',
       divider:        '分隔线',
 
-      'picture-upload': '图片',
-      'file-upload':    '文件',
+      'picture-upload': '图片附件',
+      'file-upload':    '附件',
       'rich-editor':    '富文本',
       cascader:         '级联选择',
       slot:             '插槽',

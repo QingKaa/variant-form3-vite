@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-form-designer ref="vfDesignerRef" :global-dsv="globalDsv">
+    <v-form-designer ref="vfDesignerRef" :designerConfig="designerConfig" :bannedWidgets="bannedWidgets" :global-dsv="globalDsv">
       <!--
       <template #customToolButtons>
         <el-button type="text" @click="doTest">测试btn</el-button>
@@ -26,6 +26,11 @@ export default {
         testPort: 8080,
       },
 
+      bannedWidgets:['table','rate', 'card','html', 'button', 'rich-editor', 'html-text'],
+      designerConfig:{
+        eventCollapse: false,
+        formTemplates: true,
+      }
     }
   },
   computed: {

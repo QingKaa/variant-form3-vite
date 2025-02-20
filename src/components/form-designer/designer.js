@@ -588,7 +588,8 @@ export function createDesigner(vueInstance) {
     },
 
     getContainerByType(typeName) {
-      let allWidgets = [...containers, ...basicFields, ...advancedFields, ...customFields]
+      // let allWidgets = [...containers, ...basicFields, ...advancedFields, ...customFields]
+      let allWidgets = [...containers, ...basicFields, ...customFields]
       let foundCon = null
       allWidgets.forEach(con => {
         if (!!con.category && !!con.type && (con.type === typeName)) {
@@ -600,7 +601,8 @@ export function createDesigner(vueInstance) {
     },
 
     getFieldWidgetByType(typeName) {
-      let allWidgets = [...containers, ...basicFields, ...advancedFields, ...customFields]
+      // let allWidgets = [...containers, ...basicFields, ...advancedFields, ...customFields]
+      let allWidgets = [...containers, ...basicFields, ...customFields]
       let foundWidget = null
       allWidgets.forEach(widget => {
         if (!!!widget.category && !!widget.type && (widget.type === typeName)) {

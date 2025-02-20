@@ -1,20 +1,14 @@
 <template>
-  <el-scrollbar class="side-scroll-bar" :style="{ height: scrollerHeight }">
-    <div class="panel-container">
-      <el-tabs v-model="firstTab" class="no-bottom-margin indent-left-margin">
-        <el-tab-pane name="componentLib">
-          <template #label>
-            <span
-              ><svg-icon icon-class="el-set-up" />
-              {{ i18nt("designer.componentLib") }}</span
-            >
-          </template>
-
+  <!-- <el-scrollbar class="side-scroll-bar" :style="{ height: scrollerHeight }"> -->
+  <div class="panel-container">
+    <el-tabs v-model="firstTab" class="no-bottom-margin indent-left-margin">
+      <el-tab-pane name="componentLib" style="height: 100%; width: 100%; overflow: hidden">
+        <template #label>
+          <span style="padding-bottom:2px;"><svg-icon icon-class="el-set-up" /> {{ i18nt("designer.componentLib") }}</span>
+        </template>
+        <el-scrollbar class="side-scroll-bar">
           <el-collapse v-model="activeNames" class="widget-collapse">
-            <el-collapse-item
-              name="1"
-              :title="i18nt('designer.containerTitle')"
-            >
+            <el-collapse-item name="1" :title="i18nt('designer.containerTitle')">
               <draggable
                 tag="ul"
                 :list="containers"
@@ -27,64 +21,24 @@
                 @end="onContainerDragEnd"
               >
                 <template #item="{ element: ctn }">
-                  <li
-                    class="container-widget-item"
-                    :title="ctn.displayName"
-                    @dblclick="addContainerByDbClick(ctn)"
-                  >
-                    <span
-                      ><svg-icon
-                        :icon-class="ctn.icon"
-                        class-name="color-svg-icon"
-                      />{{
-                        i18n2t(
-                          `designer.widgetLabel.${ctn.type}`,
-                          `extension.widgetLabel.${ctn.type}`
-                        )
-                      }}</span
-                    >
+                  <li class="container-widget-item" :title="ctn.displayName" @dblclick="addContainerByDbClick(ctn)">
+                    <span><svg-icon :icon-class="ctn.icon" class-name="color-svg-icon" />{{ i18n2t(`designer.widgetLabel.${ctn.type}`, `extension.widgetLabel.${ctn.type}`) }}</span>
                   </li>
                 </template>
               </draggable>
             </el-collapse-item>
 
-            <el-collapse-item
-              name="2"
-              :title="i18nt('designer.basicFieldTitle')"
-            >
-              <draggable
-                tag="ul"
-                :list="basicFields"
-                item-key="key"
-                :group="{ name: 'dragGroup', pull: 'clone', put: false }"
-                :move="checkFieldMove"
-                :clone="handleFieldWidgetClone"
-                ghost-class="ghost"
-                :sort="false"
-              >
+            <el-collapse-item name="2" :title="i18nt('designer.basicFieldTitle')">
+              <draggable tag="ul" :list="basicFields" item-key="key" :group="{ name: 'dragGroup', pull: 'clone', put: false }" :move="checkFieldMove" :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
                 <template #item="{ element: fld }">
-                  <li
-                    class="field-widget-item"
-                    :title="fld.displayName"
-                    @dblclick="addFieldByDbClick(fld)"
-                  >
-                    <span
-                      ><svg-icon
-                        :icon-class="fld.icon"
-                        class-name="color-svg-icon"
-                      />{{
-                        i18n2t(
-                          `designer.widgetLabel.${fld.type}`,
-                          `extension.widgetLabel.${fld.type}`
-                        )
-                      }}</span
-                    >
+                  <li class="field-widget-item" :title="fld.displayName" @dblclick="addFieldByDbClick(fld)">
+                    <span><svg-icon :icon-class="fld.icon" class-name="color-svg-icon" />{{ i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`) }}</span>
                   </li>
                 </template>
               </draggable>
             </el-collapse-item>
 
-            <el-collapse-item
+            <!-- <el-collapse-item
               name="3"
               :title="i18nt('designer.advancedFieldTitle')"
             >
@@ -118,94 +72,52 @@
                   </li>
                 </template>
               </draggable>
-            </el-collapse-item>
+            </el-collapse-item> -->
 
-            <el-collapse-item
-              name="4"
-              :title="i18nt('designer.customFieldTitle')"
-            >
-              <draggable
-                tag="ul"
-                :list="customFields"
-                item-key="key"
-                :group="{ name: 'dragGroup', pull: 'clone', put: false }"
-                :move="checkFieldMove"
-                :clone="handleFieldWidgetClone"
-                ghost-class="ghost"
-                :sort="false"
-              >
+            <el-collapse-item name="4" :title="i18nt('designer.customFieldTitle')">
+              <draggable tag="ul" :list="customFields" item-key="key" :group="{ name: 'dragGroup', pull: 'clone', put: false }" :move="checkFieldMove" :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
                 <template #item="{ element: fld }">
-                  <li
-                    class="field-widget-item"
-                    :title="fld.displayName"
-                    @dblclick="addFieldByDbClick(fld)"
-                  >
-                    <span>
-                      <svg-icon
-                        :icon-class="fld.icon"
-                        class-name="color-svg-icon"
-                      />{{
-                        i18n2t(
-                          `designer.widgetLabel.${fld.type}`,
-                          `extension.widgetLabel.${fld.type}`
-                        )
-                      }}</span
-                    >
+                  <li class="field-widget-item" :title="fld.displayName" @dblclick="addFieldByDbClick(fld)">
+                    <span> <svg-icon :icon-class="fld.icon" class-name="color-svg-icon" />{{ i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`) }}</span>
                   </li>
                 </template>
               </draggable>
             </el-collapse-item>
           </el-collapse>
-        </el-tab-pane>
+        </el-scrollbar>
+      </el-tab-pane>
 
-        <el-tab-pane
-          v-if="showFormTemplates()"
-          name="formLib"
-          style="padding: 8px"
-        >
-          <template #label>
-            <span
-              ><svg-icon icon-class="el-form-template" />
-              {{ i18nt("designer.formLib") }}</span
-            >
-          </template>
-
-          <template v-for="(ft, idx) in formTemplates">
-            <el-card
-              :bord-style="{ padding: '0' }"
-              shadow="hover"
-              class="ft-card"
-            >
-              <el-popover placement="right" trigger="hover">
-                <template #reference>
-                  <img :src="ft.imgUrl" style="width: 200px" />
-                </template>
-                <img :src="ft.imgUrl" style="height: 600px; width: 720px" />
-              </el-popover>
-              <div class="bottom clear-fix">
-                <span class="ft-title">#{{ idx + 1 }} {{ ft.title }}</span>
-                <el-button
-                  link
-                  type="primary"
-                  class="right-button"
-                  @click="loadFormTemplate(ft.jsonUrl)"
-                >
-                  {{ i18nt("designer.hint.loadFormTemplate") }}</el-button
-                >
-              </div>
-            </el-card>
-          </template>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
-  </el-scrollbar>
+      <el-tab-pane v-if="showFormTemplates()" name="formLib"  style="height: 100%; width: 100%; overflow: hidden; padding:8px;box-sizing:border-box;">
+        <template #label>
+          <span><svg-icon icon-class="el-form-template" /> {{ i18nt("designer.formLib") }}</span>
+        </template>
+        <el-scrollbar class="side-scroll-bar">
+        <template v-for="(ft, idx) in formTemplates">
+          <el-card :bord-style="{ padding: '0' }" shadow="hover" class="ft-card">
+            <el-popover placement="right" trigger="hover">
+              <template #reference>
+                <img :src="ft.imgUrl" style="width: 200px" />
+              </template>
+              <img :src="ft.imgUrl" style="height: 600px; width: 720px" />
+            </el-popover>
+            <div class="bottom clear-fix">
+              <span class="ft-title">#{{ idx + 1 }} {{ ft.title }}</span>
+              <el-button link type="primary" class="right-button" @click="loadFormTemplate(ft.jsonUrl)"> {{ i18nt("designer.hint.loadFormTemplate") }}</el-button>
+            </div>
+          </el-card>
+        </template>
+      </el-scrollbar>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
+  <!-- </el-scrollbar> -->
 </template>
 
 <script>
 import {
+  // advancedFields as AFS,
   containers as CONS,
   basicFields as BFS,
-  advancedFields as AFS,
   customFields as CFS,
 } from "./widgetsConfig";
 import { formTemplates } from "./templatesConfig";
@@ -239,13 +151,13 @@ export default {
 
       firstTab: "componentLib",
 
-      scrollerHeight: 0,
+      scrollerHeight: "100%",
 
       activeNames: ["1", "2", "3", "4"],
 
       containers: [],
       basicFields: [],
-      advancedFields: [],
+      // advancedFields: [],
       customFields: [],
 
       formTemplates: formTemplates,
@@ -269,14 +181,13 @@ export default {
   },
   mounted() {
     //this.loadWidgets()
-
-    this.scrollerHeight = window.innerHeight - 56 + "px";
-    addWindowResizeHandler(() => {
-      this.$nextTick(() => {
-        this.scrollerHeight = window.innerHeight - 56 + "px";
-        //console.log(this.scrollerHeight)
-      });
-    });
+    // this.scrollerHeight = window.innerHeight - 56 + "px";
+    // addWindowResizeHandler(() => {
+    //   this.$nextTick(() => {
+    //     this.scrollerHeight = window.innerHeight - 56 + "px";
+    //     //console.log(this.scrollerHeight)
+    //   });
+    // });
   },
   methods: {
     isBanned(wName) {
@@ -296,10 +207,7 @@ export default {
         return {
           key: generateId(),
           ...con,
-          displayName: this.i18n2t(
-            `designer.widgetLabel.${con.type}`,
-            `extension.widgetLabel.${con.type}`
-          ),
+          displayName: this.i18n2t(`designer.widgetLabel.${con.type}`, `extension.widgetLabel.${con.type}`),
         };
       }).filter((con) => {
         return !con.internal && !this.isBanned(con.type);
@@ -309,36 +217,30 @@ export default {
         return {
           key: generateId(),
           ...fld,
-          displayName: this.i18n2t(
-            `designer.widgetLabel.${fld.type}`,
-            `extension.widgetLabel.${fld.type}`
-          ),
+          displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`),
         };
       }).filter((fld) => {
         return !this.isBanned(fld.type);
       });
 
-      this.advancedFields = AFS.map((fld) => {
-        return {
-          key: generateId(),
-          ...fld,
-          displayName: this.i18n2t(
-            `designer.widgetLabel.${fld.type}`,
-            `extension.widgetLabel.${fld.type}`
-          ),
-        };
-      }).filter((fld) => {
-        return !this.isBanned(fld.type);
-      });
+      // this.advancedFields = AFS.map((fld) => {
+      //   return {
+      //     key: generateId(),
+      //     ...fld,
+      //     displayName: this.i18n2t(
+      //       `designer.widgetLabel.${fld.type}`,
+      //       `extension.widgetLabel.${fld.type}`
+      //     ),
+      //   };
+      // }).filter((fld) => {
+      //   return !this.isBanned(fld.type);
+      // });
 
       this.customFields = CFS.map((fld) => {
         return {
           key: generateId(),
           ...fld,
-          displayName: this.i18n2t(
-            `designer.widgetLabel.${fld.type}`,
-            `extension.widgetLabel.${fld.type}`
-          ),
+          displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`),
         };
       }).filter((fld) => {
         return !this.isBanned(fld.type);
@@ -375,14 +277,10 @@ export default {
     },
 
     loadFormTemplate(jsonUrl) {
-      this.$confirm(
-        this.i18nt("designer.hint.loadFormTemplateHint"),
-        this.i18nt("render.hint.prompt"),
-        {
-          confirmButtonText: this.i18nt("render.hint.confirm"),
-          cancelButtonText: this.i18nt("render.hint.cancel"),
-        }
-      )
+      this.$confirm(this.i18nt("designer.hint.loadFormTemplateHint"), this.i18nt("render.hint.prompt"), {
+        confirmButtonText: this.i18nt("render.hint.confirm"),
+        cancelButtonText: this.i18nt("render.hint.cancel"),
+      })
         .then(() => {
           axios
             .get(jsonUrl)
@@ -397,14 +295,10 @@ export default {
                 this.designer.emitHistoryChange();
               }
 
-              this.$message.success(
-                this.i18nt("designer.hint.loadFormTemplateSuccess")
-              );
+              this.$message.success(this.i18nt("designer.hint.loadFormTemplateSuccess"));
             })
             .catch((error) => {
-              this.$message.error(
-                this.i18nt("designer.hint.loadFormTemplateFailed") + ":" + error
-              );
+              this.$message.error(this.i18nt("designer.hint.loadFormTemplateFailed") + ":" + error);
             });
         })
         .catch((error) => {
@@ -428,11 +322,19 @@ export default {
 }
 
 div.panel-container {
-  padding-bottom: 10px;
+  // padding-bottom: 10px;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .no-bottom-margin :deep(.el-tabs__header) {
   margin-bottom: 0;
+}
+.no-bottom-margin :deep(.el-tabs__nav-wrap) {
+  padding-bottom: 2px;
+}
+.no-bottom-margin {
+  height: 100%;
 }
 
 .indent-left-margin {
@@ -449,7 +351,7 @@ div.panel-container {
   border-top-width: 0;
 
   :deep(.el-collapse-item__header) {
-    margin-left: 8px;
+    padding: 0 8px;
     font-style: italic;
     font-weight: bold;
   }

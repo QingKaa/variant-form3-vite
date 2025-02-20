@@ -124,7 +124,7 @@ function getElAttrs(widget, formConfig) {  //获取El组件属性
     type: !!wop.type ? `type="${wop.type === 'number' ? 'text' : wop.type}"` : '',
     showPassword: !!wop.showPassword ? `:show-password="${wop.showPassword}"` : '',
     placeholder: !!wop.placeholder ? `placeholder="${wop.placeholder}"` : '',
-    rows: (isNotNull(wop.rows) && !isNaN(wop.rows)) ? `rows="${wop.rows}"` : '',
+    rows: (isNotNull(wop.rows) && !isNaN(wop.rows)) ? `:rows="${wop.rows}"` : '',
     clearable: !!wop.clearable ? 'clearable' : '',
     minlength: (isNotNull(wop.minLength) && !isNaN(wop.minLength)) ? `:minlength="${wop.minLength}"` : '',
     maxlength: (isNotNull(wop.maxLength) && !isNaN(wop.maxLength)) ? `:maxlength="${wop.maxLength}"` : '',
@@ -203,7 +203,7 @@ function buildCheckboxChildren(widget, formConfig) {
   const childTag = !!wop.buttonStyle ? 'el-checkbox-button' : 'el-checkbox'
   const borderAttr = !!wop.border ? `border` : ''
   const styleAttr = `style="{display: ${wop.displayStyle}}"`
-  return `<${childTag} v-for="(item, index) in ${wop.name}Options" :key="index" :label="item.value"
+  return `<${childTag} v-for="(item, index) in ${wop.name}Options" :key="index" :value="item.value"
           :disabled="item.disabled" ${borderAttr} ${styleAttr}>{{item.label}}</${childTag}>`
 }
 
