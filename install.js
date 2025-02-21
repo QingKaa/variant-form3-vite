@@ -15,6 +15,7 @@ import ContainerItems from '@/components/form-render/container-item/index'
 import { addDirective } from '@/utils/directive'
 import { installI18n } from '@/utils/i18n'
 import { loadExtension } from '@/extension/extension-loader'
+import registerHelper from "@/extension/extension-helper"
 
 
 VFormDesigner.install = function (app) {
@@ -68,6 +69,7 @@ if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时赋�
 }
 
 export default {
+  registerHelper,
   install,
   VFormDesigner,
   VFormRender

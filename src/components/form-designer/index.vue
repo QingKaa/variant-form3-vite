@@ -113,11 +113,6 @@ export default {
       vsCodeFlag: false,
       caseName: "",
 
-      docUrl: "https://www.vform666.com/document3.html",
-      gitUrl: "https://github.com/vform666/variant-form3-vite",
-      chatUrl: "https://www.vform666.com/pages/chat-group/",
-      subScribeUrl: "https://www.vform666.com/pages/pro/",
-
       scrollerHeight: "100%",
 
       designer: createDesigner(this),
@@ -138,78 +133,11 @@ export default {
   },
   mounted() {
     this.initLocale();
-
-    // this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'
-    // addWindowResizeHandler(() => {
-    //   this.$nextTick(() => {
-    //     this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'
-    //   })
-    // })
-
-    this.loadCase();
-    this.loadFieldListFromServer();
   },
   methods: {
     testEEH(eventName, eventParams) {
       console.log("test", eventName);
       console.log("test222222", eventParams);
-    },
-
-    showLink(configName) {
-      if (this.designerConfig[configName] === undefined) {
-        return true;
-      }
-
-      return !!this.designerConfig[configName];
-    },
-
-    openHome() {
-      if (!!this.vsCodeFlag) {
-        const msgObj = {
-          cmd: "openUrl",
-          data: {
-            url: "https://www.vform666.com/",
-          },
-        };
-        window.parent.postMessage(msgObj, "*");
-      }
-    },
-
-    openUrl(event, url) {
-      if (!!this.vsCodeFlag) {
-        const msgObj = {
-          cmd: "openUrl",
-          data: {
-            url,
-          },
-        };
-        window.parent.postMessage(msgObj, "*");
-      } else {
-        let aDom = event.currentTarget;
-        aDom.href = url;
-        //window.open(url, '_blank') //直接打开新窗口，会被浏览器拦截
-      }
-    },
-
-    loadCase() {
-      if (!this.caseName) {
-        return;
-      }
-
-      axios
-        .get(MOCK_CASE_URL + this.caseName + ".txt")
-        .then((res) => {
-          if (!!res.data.code) {
-            this.$message.error(this.i18nt("designer.hint.sampleLoadedFail"));
-            return;
-          }
-
-          this.setFormJson(res.data);
-          this.$message.success(this.i18nt("designer.hint.sampleLoadedSuccess"));
-        })
-        .catch((error) => {
-          this.$message.error(this.i18nt("designer.hint.sampleLoadedFail") + ":" + error);
-        });
     },
 
     initLocale() {
@@ -287,8 +215,6 @@ export default {
      * 刷新表单设计器
      */
     refreshDesigner() {
-      //this.designer.loadFormJson( this.getFormJson() )  //只有第一次调用生效？？
-
       let fJson = this.getFormJson();
       this.designer.clearDesigner(true); //不触发历史记录变更
       this.designer.loadFormJson(fJson);

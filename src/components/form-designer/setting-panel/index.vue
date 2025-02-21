@@ -97,7 +97,7 @@ import emitter from "@/utils/emitter";
 import { propertyRegistered } from "@/components/form-designer/setting-panel/propertyRegister";
 
 const { COMMON_PROPERTIES, ADVANCED_PROPERTIES, EVENT_PROPERTIES } = WidgetProperties;
-
+const unUseProperty = ['customClass']
 export default {
   name: "SettingPanel",
   componentName: "SettingPanel",

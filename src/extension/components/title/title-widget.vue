@@ -69,7 +69,6 @@ export default {
   created() {
     this.registerToRefList();
     this.initEventHandler();
-    console.log("  =====> this.field:", this.field);
   },
   beforeUnmount() {
     this.unregisterFromRefList();

@@ -1,7 +1,7 @@
 import TitleWidget from "./title-widget.vue";
 import schema from "./schema";
 import sfcTemplate from "./sfc-generator";
-import { addCustomWidgetSchema } from "@/components/form-designer/widget-panel/widgetsConfig";
+import { addBasicFieldSchema } from "@/components/form-designer/widget-panel/widgetsConfig";
 import * as PERegister from "@/components/form-designer/setting-panel/propertyRegister";
 import * as PEFactory from "@/components/form-designer/setting-panel/property-editor-factory.jsx";
 import { registerFWGenerator } from "@/utils/sfc-generator";
@@ -15,7 +15,7 @@ import { registerFWGenerator } from "@/utils/sfc-generator";
  * 5. 加载完毕。
  */
 export const registerTitleWidget = (app) => {
-  addCustomWidgetSchema(schema);
+  addBasicFieldSchema(schema);
   app.component(TitleWidget.name, TitleWidget);
 
   PERegister.registerCPEditor(app, "title-title", "title-title-editor", PEFactory.createInputTextEditor("title", "extension.setting.alertTitle"));
@@ -27,6 +27,6 @@ export const registerTitleWidget = (app) => {
     { label: "中间", value: "center" },
     { label: "右", value: "right" },
   ];
-  PERegister.registerCPEditor(app, "title-textAlign", "title-textAlign-editor", PEFactory.createRadioButtonGroupEditor("textAlign", "extension.setting.textAlign", { optionItems: alignItems }));
+  PERegister.registerCPEditor(app, "title-textAlign", "title-textAlign-editor", PEFactory.createRadioButtonGroupEditor("textAlign", "designer.setting.textAlign", { optionItems: alignItems }));
   registerFWGenerator("title", sfcTemplate);
 };
