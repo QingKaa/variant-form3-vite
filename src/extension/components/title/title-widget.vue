@@ -53,7 +53,7 @@ export default {
     titleStyle(){
       const { fontSize, textAlign, backgroundColor, color } = this.field.options;
       return {
-        fontSize: fontSize || '16px',
+        fontSize: fontSize || '24px',
         textAlign: textAlign || 'left',
         backgroundColor: backgroundColor || '#fff',
         color: color,

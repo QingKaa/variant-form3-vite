@@ -165,14 +165,19 @@ export default {
     },
 
     setting: {
-      basicSetting: '基本属性',
+      styleSetting: '样式设置',
+      basicSetting: '基本设置',
+      limitSetting: '限制设置',
+      otherSetting: '其他设置',
+      advancedSetting: '高级属性',
+      
       attributeSetting: '属性设置',
       commonSetting: '常见属性',
-      advancedSetting: '高级属性',
       eventSetting: '事件属性',
+
       uniqueName: '唯一名称',
       editNameHelp: '修改名称后需按回车确认',
-      label: '标签',
+      label: '标签文字',
       displayType: '显示类型',
       defaultValue: '默认值',
       placeholder: '占位内容',
@@ -256,8 +261,10 @@ export default {
       paneActive: '激活',
 
       customLabelIcon: '定制字段标签',
-      labelIconClass: '标签Icon样式',
+      labelIconClass: '标签Icon名称',
       labelIconPosition: '标签Icon位置',
+      labelIconPositionFront: '前',
+      labelIconPositionRear: '后',
       labelTooltip: '标签文字提示',
       minValue: '最小值',
       maxValue: '最大值',
@@ -328,6 +335,8 @@ export default {
       formRulesName: '验证规则名称',
       syntaxCheckWarning: 'JS代码存在语法错误，请仔细检查！',
 
+      labelFontSize: '标签字体大小',
+      labelFontColor: '标签字体颜色'
     }
 
   }

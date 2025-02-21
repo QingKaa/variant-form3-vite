@@ -11,6 +11,15 @@
               <el-radio-button v-for="item in formSizes" :key="item.value" :value="item.value"> {{ item.label }} </el-radio-button>
             </el-radio-group>
           </el-form-item>
+
+          <el-form-item :label="i18nt('designer.setting.labelFontSize')">
+            <el-input-number v-model="formConfig.labelFontSize" :min="12" style="width: 100%"></el-input-number>
+          </el-form-item>
+
+          <el-form-item :label="i18nt('designer.setting.labelFontColor')">
+            <el-color-picker v-model="formConfig.labelFontColor" @active-change="(e) => (formConfig.labelFontColor = e)"></el-color-picker>
+          </el-form-item>
+
           <el-form-item :label="i18nt('designer.setting.labelPosition')">
             <el-radio-group v-model="formConfig.labelPosition" class="radio-group-custom">
               <el-radio-button value="left">{{ i18nt("designer.setting.leftPosition") }}</el-radio-button>

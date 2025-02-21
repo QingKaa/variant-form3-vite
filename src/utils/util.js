@@ -362,6 +362,8 @@ export function getDefaultFormConfig() {
     functions: '',  //全局函数
     layoutType: 'PC',
     jsonVersion: 3,
+    labelFontSize: 16,
+    labelFontColor:'#333',
 
     onFormCreated: '',
     onFormMounted: '',

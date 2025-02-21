@@ -164,14 +164,20 @@ export default {
     },
 
     setting: {
+      styleSetting: 'Style Setting',
       basicSetting: 'Basic Setting',
+      limitSetting: 'Limit Setting',
+      otherSetting: 'Other Setting',
+      advancedSetting: 'Advanced Setting',
+
       attributeSetting: 'Attribute Setting',
       commonSetting: 'Common Setting',
-      advancedSetting: 'Advanced Setting',
       eventSetting: 'Event Setting',
       uniqueName: 'Unique Name',
       editNameHelp: 'Press enter to confirm the modification',
-      label: 'Label',
+      labelIconPositionFront: 'Front',
+      labelIconPositionRear: 'Rear',
+      label: 'Label Text',
       displayType: 'Type',
       defaultValue: 'Default Value',
       placeholder: 'Placeholder',
@@ -327,6 +333,9 @@ export default {
       formRulesName: 'Rules Name',
       syntaxCheckWarning: 'Syntax error in the javascript codes, please check again!',
 
+
+      labelFontSize: 'Label Font Size',
+      labelFontColor: 'Label Font Color'
     }
 
   }

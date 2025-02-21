@@ -6,47 +6,31 @@
           <template v-if="!!designer.selectedWidget && !designer.selectedWidget.category">
             <el-form :model="optionModel" size="small" label-position="left" label-width="120px" class="setting-form" @submit.prevent>
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
-                <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">
-                  <template v-for="(editorName, propName) in activeCommon">
-                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
-                  </template>
-                </el-collapse-item>
-
-                <el-collapse-item name="2" v-if="showCollapse(advProps)" :title="i18nt('designer.setting.advancedSetting')">
-                  <template v-for="(editorName, propName) in activeAdvProps">
-                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
-                  </template>
-                </el-collapse-item>
-
-                <el-collapse-item name="3" v-if="showEventCollapse() && showCollapse(eventProps)" :title="i18nt('designer.setting.eventSetting')">
-                  <template v-for="(editorName, propName) in activeEventProps">
-                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
-                  </template>
-                </el-collapse-item>
+                <template v-for="cat in propertyCategory">
+                  <el-collapse-item v-if="showCollapse(cat.props)" :name="cat.name" :title="i18nt(`designer.setting.${cat.label}`)" :key="cat.name">
+                    <template v-for="(editorName, propName) in cat.props">
+                      <template v-if="hasPropEditor(propName, editorName)">
+                        <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                      </template>
+                    </template>
+                  </el-collapse-item>
+                </template>
               </el-collapse>
             </el-form>
           </template>
 
           <template v-if="!!designer.selectedWidget && !!designer.selectedWidget.category">
             <el-form :model="optionModel" size="small" label-position="left" label-width="120px" class="setting-form" @submit.prevent>
-              <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
-                <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">
-                  <template v-for="(editorName, propName) in activeCommon">
-                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
-                  </template>
-                </el-collapse-item>
-
-                <el-collapse-item name="2" v-if="showCollapse(advProps)" :title="i18nt('designer.setting.advancedSetting')">
-                  <template v-for="(editorName, propName) in activeAdvProps">
-                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
-                  </template>
-                </el-collapse-item>
-
-                <el-collapse-item name="3" v-if="showEventCollapse() && showCollapse(eventProps)" :title="i18nt('designer.setting.eventSetting')">
-                  <template v-for="(editorName, propName) in activeEventProps">
-                    <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
-                  </template>
-                </el-collapse-item>
+              <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse" v-if="propertyCategory && propertyCategory.length">
+                <template v-for="cat in propertyCategory">
+                  <el-collapse-item v-if="showCollapse(cat.props)" :name="cat.name" :title="i18nt(`designer.setting.${cat.label}`)" :key="cat.name">
+                    <template v-for="(editorName, propName) in cat.props">
+                      <template v-if="hasPropEditor(propName, editorName)">
+                        <component :is="getPropEditor(propName, editorName)" :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
+                      </template>
+                    </template>
+                  </el-collapse-item>
+                </template>
               </el-collapse>
             </el-form>
           </template>
@@ -96,8 +80,10 @@ import eventBus from "@/utils/event-bus";
 import emitter from "@/utils/emitter";
 import { propertyRegistered } from "@/components/form-designer/setting-panel/propertyRegister";
 
-const { COMMON_PROPERTIES, ADVANCED_PROPERTIES, EVENT_PROPERTIES } = WidgetProperties;
-const unUseProperty = ['customClass']
+const { BASE_PROPERTIES, STYLE_PROPERTIES, LIMIT_PROPERTIES, OTHER_PROPERTIES, ADVANCED_PROPERTIES, EVENT_PROPERTIES } = WidgetProperties;
+
+const unUseProperty = ["customClass"];
+
 export default {
   name: "SettingPanel",
   componentName: "SettingPanel",
@@ -124,12 +110,8 @@ export default {
       scrollerHeight: "100%",
 
       activeTab: "2",
-      widgetActiveCollapseNames: ["1", "3"], //['1', '2', '3'],
-      formActiveCollapseNames: ["1", "2"],
-
-      commonProps: COMMON_PROPERTIES,
-      advProps: ADVANCED_PROPERTIES,
-      eventProps: EVENT_PROPERTIES,
+      widgetActiveCollapseNames: [], //['1', '2', '3'],
+      formActiveCollapseNames: ["0", "1", "2", "3"],
 
       showWidgetEventDialogFlag: false,
       eventHandlerCode: "",
@@ -137,6 +119,8 @@ export default {
       eventHeader: "",
 
       subFormChildWidgetFlag: false,
+
+      propertyCategory: [],
     };
   },
   computed: {
@@ -148,33 +132,6 @@ export default {
       set(newValue) {
         this.selectedWidget.options = newValue;
       },
-    },
-    activeCommon() {
-      return Object.keys(this.commonProps).reduce((obj, propName) => {
-        if (propName === "customClass") return obj;
-        if (this.commonProps[propName] && this.hasPropEditor(propName, this.commonProps[propName])) {
-          obj[propName] = this.commonProps[propName];
-        }
-        return obj;
-      }, {});
-    },
-    activeAdvProps() {
-      return Object.keys(this.advProps).reduce((obj, propName) => {
-        if (propName === "customClass") return obj;
-        if (this.advProps[propName] && this.hasPropEditor(propName, this.advProps[propName])) {
-          obj[propName] = this.advProps[propName];
-        }
-        return obj;
-      }, {});
-    },
-    activeEventProps() {
-      return Object.keys(this.eventProps).reduce((obj, propName) => {
-        if (propName === "customClass") return obj;
-        if (this.eventProps[propName] && this.hasPropEditor(propName, this.eventProps[propName])) {
-          obj[propName] = this.eventProps[propName];
-        }
-        return obj;
-      }, {});
     },
   },
   watch: {
@@ -217,15 +174,33 @@ export default {
     } else {
       this.activeTab = "1";
     }
-    console.log("  =====> commonProps:", this.commonProps);
-    // this.scrollerHeight = window.innerHeight - 56 - 48 + 'px'
-    // addWindowResizeHandler(() => {
-    //   this.$nextTick(() => {
-    //     this.scrollerHeight = window.innerHeight - 56 - 48 + 'px'
-    //   })
-    // })
+    this.getCurCategory();
   },
   methods: {
+    getCurCategory() {
+      try {
+        this.propertyCategory = [
+          { name: "base", label: "basicSetting", props: BASE_PROPERTIES },
+          { name: "style", label: "styleSetting", props: STYLE_PROPERTIES },
+          { name: "limit", label: "limitSetting", props: LIMIT_PROPERTIES },
+          { name: "common", label: "otherSetting", props: OTHER_PROPERTIES },
+          { name: 'advanced', label: 'advancedSetting', props: ADVANCED_PROPERTIES },
+        ];
+        this.widgetActiveCollapseNames.push(...this.propertyCategory.map((item) => item.name));
+      } catch (error) {
+        console.log("  =====> error:", error);
+      }
+    },
+
+    getActiveProperties(properties) {
+      return Object.keys(properties).reduce((obj, propName) => {
+        if (this.hasPropEditor(propName, properties[propName])) {
+          obj[propName] = properties[propName];
+        }
+        return obj;
+      }, {});
+    },
+
     showEventCollapse() {
       if (this.designerConfig["eventCollapse"] === undefined) {
         return true;
@@ -238,6 +213,7 @@ export default {
       if (!editorName) {
         return false;
       }
+      if (!this.selectedWidget) return false;
 
       /* alert组件注册了两个type属性编辑器，跳过第一个type属性编辑器，只显示第二个alert-type属性编辑器！！ */
       if (propName.indexOf("-") <= -1) {

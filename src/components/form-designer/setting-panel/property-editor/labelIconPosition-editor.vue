@@ -1,37 +1,33 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.labelIconPosition')">
-    <el-select v-model="optionModel.labelIconPosition">
-      <el-option v-for="item in labelIconPosition" :key="item.value" :label="item.label"
-                 :value="item.value">
-      </el-option>
-    </el-select>
+    <el-radio-group v-model="optionModel.labelIconPosition">
+      <el-radio-button v-for="item in labelIconPosition" :key="item.key" :value="item.value">
+        {{ i18nt(item.label) }}
+      </el-radio-button>
+    </el-radio-group>
   </el-form-item>
 </template>
 
 <script>
-  import i18n from "@/utils/i18n"
+import i18n from "@/utils/i18n";
 
-  export default {
-    name: "labelIconPosition-editor",
-    mixins: [i18n],
-    props: {
-      designer: Object,
-      selectedWidget: Object,
-      optionModel: Object,
-    },
-    data() {
-      return {
-        labelIconPosition: [
-          {label: 'front', value: 'front'},
-          {label: 'rear', value: 'rear'},
-        ],
-
-      }
-    },
-
-  }
+export default {
+  name: "labelIconPosition-editor",
+  mixins: [i18n],
+  props: {
+    designer: Object,
+    selectedWidget: Object,
+    optionModel: Object,
+  },
+  data() {
+    return {
+      labelIconPosition: [
+        { label: "designer.setting.labelIconPositionFront", value: "front" },
+        { label: "designer.setting.labelIconPositionRear", value: "rear" },
+      ],
+    };
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

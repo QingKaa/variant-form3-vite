@@ -733,8 +733,8 @@ export function createDesigner(vueInstance) {
       newWidget.id = newWidget.type.replace(/-/g, '') + tempId
       //console.log('test id===', newWidget.id)
       newWidget.options.name = newWidget.id
-      newWidget.options.label = newWidget.options.label || newWidget.type.toLowerCase()
-
+      // newWidget.options.label = newWidget.options.label || newWidget.type.toLowerCase()
+      newWidget.options.label = newWidget.displayName // 改成多语言版本名称
       delete newWidget.displayName
       return newWidget
     },

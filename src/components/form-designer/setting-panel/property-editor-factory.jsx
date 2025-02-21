@@ -176,10 +176,19 @@ export const createColorPickerEditor = function (propName, propLabelKey) {
     props: {
       optionModel: Object,
     },
+    methods:{
+      onColorChange(newValue) {
+        if ((newValue === undefined) || (newValue === null)) {
+          this.optionModel[propName] = null
+        } else {
+          this.optionModel[propName] = newValue
+        }
+      },
+    },
     render(h) {
       return (
         <el-form-item label={translate(propLabelKey)}>
-          <el-color-picker v-model={this.optionModel[propName]} />
+          <el-color-picker v-model={this.optionModel[propName]} onActiveChange={this.onColorChange} />
         </el-form-item>
       )
     }
