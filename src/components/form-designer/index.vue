@@ -11,7 +11,7 @@
 <template>
   <el-container class="designer-container">
     <el-aside class="side-panel">
-      <widget-panel :designer="designer" />
+      <widget-panel :designer="designer" :customWidgets="$attrs.customWidgets" />
     </el-aside>
 
     <el-container class="center-layout-container">
@@ -103,6 +103,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
   },
   data() {
     return {

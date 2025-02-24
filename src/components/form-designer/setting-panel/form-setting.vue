@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :model="formConfig" size="small" label-position="left" label-width="120px" class="setting-form" @submit.prevent>
+    <el-form :model="formConfig" size="small" label-position="left" label-width="110px" class="setting-form" @submit.prevent>
       <el-collapse v-model="formActiveCollapseNames" class="setting-collapse">
         <el-collapse-item name="1" :title="i18nt('designer.setting.basicSetting')">
           <el-form-item :label="i18nt('designer.setting.formSize')">

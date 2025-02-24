@@ -92,6 +92,44 @@ export const containers = [
       customClass: "", //自定义css类名
     },
   },
+  {
+    type: "static-text",
+    icon: "static-text",
+    formItemFlag: false,
+    options: {
+      name: "",
+      columnWidth: "200px",
+      hidden: false,
+      textContent: "static text",
+      textAlign: "left",
+      fontSize: "13px",
+      preWrap: false, //是否自动换行
+      //-------------------
+      customClass: "", //自定义css类名
+      //-------------------
+      onCreated: "",
+      onMounted: "",
+    },
+  },
+
+  {
+    type: "divider",
+    icon: "divider",
+    formItemFlag: false,
+    options: {
+      name: "",
+      label: "",
+      columnWidth: "200px",
+      direction: "horizontal",
+      contentPosition: "center",
+      hidden: false,
+      //-------------------
+      customClass: "", //自定义css类名
+      //-------------------
+      onCreated: "",
+      onMounted: "",
+    },
+  },
 ];
 
 export const basicFields = [
@@ -573,44 +611,44 @@ export const basicFields = [
     },
   },
 
-  {
-    type: "rate",
-    icon: "rate-field",
-    formItemFlag: true,
-    options: {
-      name: "",
-      label: "",
-      labelAlign: "",
-      defaultValue: null,
-      columnWidth: "200px",
-      labelWidth: null,
-      labelFontSize: null,
-      labelFontColor: '#333',
-      labelHidden: false,
-      disabled: false,
-      hidden: false,
-      required: false,
-      requiredHint: "",
-      validation: "",
-      validationHint: "",
-      //-------------------
-      customClass: "", //自定义css类名
-      labelIconClass: null,
-      labelIconPosition: "rear",
-      labelTooltip: null,
-      max: 5,
-      lowThreshold: 2,
-      highThreshold: 4,
-      allowHalf: false,
-      showText: false,
-      showScore: false,
-      //-------------------
-      onCreated: "",
-      onMounted: "",
-      onChange: "",
-      onValidate: "",
-    },
-  },
+  // {
+  //   type: "rate",
+  //   icon: "rate-field",
+  //   formItemFlag: true,
+  //   options: {
+  //     name: "",
+  //     label: "",
+  //     labelAlign: "",
+  //     defaultValue: null,
+  //     columnWidth: "200px",
+  //     labelWidth: null,
+  //     labelFontSize: null,
+  //     labelFontColor: '#333',
+  //     labelHidden: false,
+  //     disabled: false,
+  //     hidden: false,
+  //     required: false,
+  //     requiredHint: "",
+  //     validation: "",
+  //     validationHint: "",
+  //     //-------------------
+  //     customClass: "", //自定义css类名
+  //     labelIconClass: null,
+  //     labelIconPosition: "rear",
+  //     labelTooltip: null,
+  //     max: 5,
+  //     lowThreshold: 2,
+  //     highThreshold: 4,
+  //     allowHalf: false,
+  //     showText: false,
+  //     showScore: false,
+  //     //-------------------
+  //     onCreated: "",
+  //     onMounted: "",
+  //     onChange: "",
+  //     onValidate: "",
+  //   },
+  // },
 
   {
     type: "color",
@@ -646,127 +684,89 @@ export const basicFields = [
     },
   },
 
-  {
-    type: "slider",
-    icon: "slider-field",
-    formItemFlag: true,
-    options: {
-      name: "",
-      label: "",
-      labelAlign: "",
-      columnWidth: "200px",
-      showStops: true,
-      size: "",
-      labelWidth: null,
-      labelFontSize: null,
-      labelFontColor: '#333',
-      labelHidden: false,
-      disabled: false,
-      hidden: false,
-      required: false,
-      requiredHint: "",
-      validation: "",
-      validationHint: "",
-      //-------------------
-      customClass: "", //自定义css类名
-      labelIconClass: null,
-      labelIconPosition: "rear",
-      labelTooltip: null,
-      min: 0,
-      max: 100,
-      step: 10,
-      range: false,
-      //vertical: false,
-      height: null,
-      //-------------------
-      onCreated: "",
-      onMounted: "",
-      onChange: "",
-      onValidate: "",
-    },
-  },
+  // {
+  //   type: "slider",
+  //   icon: "slider-field",
+  //   formItemFlag: true,
+  //   options: {
+  //     name: "",
+  //     label: "",
+  //     labelAlign: "",
+  //     columnWidth: "200px",
+  //     showStops: true,
+  //     size: "",
+  //     labelWidth: null,
+  //     labelFontSize: null,
+  //     labelFontColor: '#333',
+  //     labelHidden: false,
+  //     disabled: false,
+  //     hidden: false,
+  //     required: false,
+  //     requiredHint: "",
+  //     validation: "",
+  //     validationHint: "",
+  //     //-------------------
+  //     customClass: "", //自定义css类名
+  //     labelIconClass: null,
+  //     labelIconPosition: "rear",
+  //     labelTooltip: null,
+  //     min: 0,
+  //     max: 100,
+  //     step: 10,
+  //     range: false,
+  //     //vertical: false,
+  //     height: null,
+  //     //-------------------
+  //     onCreated: "",
+  //     onMounted: "",
+  //     onChange: "",
+  //     onValidate: "",
+  //   },
+  // },
 
-  {
-    type: "static-text",
-    icon: "static-text",
-    formItemFlag: false,
-    options: {
-      name: "",
-      columnWidth: "200px",
-      hidden: false,
-      textContent: "static text",
-      textAlign: "left",
-      fontSize: "13px",
-      preWrap: false, //是否自动换行
-      //-------------------
-      customClass: "", //自定义css类名
-      //-------------------
-      onCreated: "",
-      onMounted: "",
-    },
-  },
+  // {
+  //   type: "html-text",
+  //   icon: "html-text",
+  //   formItemFlag: false,
+  //   options: {
+  //     name: "",
+  //     columnWidth: "200px",
+  //     hidden: false,
+  //     htmlContent: "<b>html text</b>",
+  //     //-------------------
+  //     customClass: "", //自定义css类名
+  //     //-------------------
+  //     onCreated: "",
+  //     onMounted: "",
+  //   },
+  // },
 
-  {
-    type: "html-text",
-    icon: "html-text",
-    formItemFlag: false,
-    options: {
-      name: "",
-      columnWidth: "200px",
-      hidden: false,
-      htmlContent: "<b>html text</b>",
-      //-------------------
-      customClass: "", //自定义css类名
-      //-------------------
-      onCreated: "",
-      onMounted: "",
-    },
-  },
+  // {
+  //   type: "button",
+  //   icon: "button",
+  //   formItemFlag: false,
+  //   options: {
+  //     name: "",
+  //     label: "",
+  //     columnWidth: "200px",
+  //     size: "",
+  //     displayStyle: "block",
+  //     disabled: false,
+  //     hidden: false,
+  //     type: "",
+  //     plain: false,
+  //     round: false,
+  //     circle: false,
+  //     icon: null,
+  //     //-------------------
+  //     customClass: "", //自定义css类名
+  //     //-------------------
+  //     onCreated: "",
+  //     onMounted: "",
+  //     onClick: "",
+  //   },
+  // },
 
-  {
-    type: "button",
-    icon: "button",
-    formItemFlag: false,
-    options: {
-      name: "",
-      label: "",
-      columnWidth: "200px",
-      size: "",
-      displayStyle: "block",
-      disabled: false,
-      hidden: false,
-      type: "",
-      plain: false,
-      round: false,
-      circle: false,
-      icon: null,
-      //-------------------
-      customClass: "", //自定义css类名
-      //-------------------
-      onCreated: "",
-      onMounted: "",
-      onClick: "",
-    },
-  },
-
-  {
-    type: "divider",
-    icon: "divider",
-    formItemFlag: false,
-    options: {
-      name: "",
-      label: "",
-      columnWidth: "200px",
-      direction: "horizontal",
-      contentPosition: "center",
-      hidden: false,
-      //-------------------
-      customClass: "", //自定义css类名
-      //-------------------
-      onCreated: "",
-      onMounted: "",
-    },
-  },
 
   {
     type: "cascader",
@@ -905,41 +905,41 @@ export const basicFields = [
       //onFileChange: '',
     },
   },
-  {
-    type: "rich-editor",
-    icon: "rich-editor-field",
-    formItemFlag: true,
-    options: {
-      name: "",
-      label: "",
-      labelAlign: "",
-      placeholder: "",
-      labelWidth: null,
-      labelFontSize: null,
-      labelFontColor: '#333',
-      labelHidden: false,
-      columnWidth: "200px",
-      contentHeight: "200px",
-      disabled: false,
-      hidden: false,
-      required: false,
-      requiredHint: "",
-      customRule: "",
-      customRuleHint: "",
-      //-------------------
-      customClass: "", //自定义css类名
-      labelIconClass: null,
-      labelIconPosition: "rear",
-      labelTooltip: null,
-      minLength: null,
-      maxLength: null,
-      showWordLimit: false,
-      //-------------------
-      onCreated: "",
-      onMounted: "",
-      onValidate: "",
-    },
-  },
+  // {
+  //   type: "rich-editor",
+  //   icon: "rich-editor-field",
+  //   formItemFlag: true,
+  //   options: {
+  //     name: "",
+  //     label: "",
+  //     labelAlign: "",
+  //     placeholder: "",
+  //     labelWidth: null,
+  //     labelFontSize: null,
+  //     labelFontColor: '#333',
+  //     labelHidden: false,
+  //     columnWidth: "200px",
+  //     contentHeight: "200px",
+  //     disabled: false,
+  //     hidden: false,
+  //     required: false,
+  //     requiredHint: "",
+  //     customRule: "",
+  //     customRuleHint: "",
+  //     //-------------------
+  //     customClass: "", //自定义css类名
+  //     labelIconClass: null,
+  //     labelIconPosition: "rear",
+  //     labelTooltip: null,
+  //     minLength: null,
+  //     maxLength: null,
+  //     showWordLimit: false,
+  //     //-------------------
+  //     onCreated: "",
+  //     onMounted: "",
+  //     onValidate: "",
+  //   },
+  // },
   //
 ];
 

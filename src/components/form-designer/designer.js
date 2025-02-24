@@ -9,6 +9,7 @@
 import {deepClone, generateId, getDefaultFormConfig, overwriteObj} from "@/utils/util"
 import {containers, advancedFields, basicFields, customFields} from "@/components/form-designer/widget-panel/widgetsConfig.js"
 import {VARIANT_FORM_VERSION} from "@/utils/config"
+import { version } from "/package.json"
 import eventBus from "@/utils/event-bus"
 
 export function createDesigner(vueInstance) {
@@ -38,7 +39,7 @@ export function createDesigner(vueInstance) {
       this.formConfig = deepClone(defaultFormConfig)
 
       //输出版本信息和语雀链接
-      console.info(`%cVariantForm %cVer${VARIANT_FORM_VERSION} %chttps://www.yuque.com/visualdev/vform3`,
+      console.info(`%c RIDP V-from-designer %cV${version} %c `,
           "color:#409EFF;font-size: 22px;font-weight:bolder",
           "color:#999;font-size: 12px",
           "color:#333"

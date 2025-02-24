@@ -11,7 +11,7 @@
 <template>
   <div class="field-wrapper" :class="{ 'design-time-bottom-margin': !!this.designer }">
     <el-form-item
-    class="field-item-wrapper"
+      class="field-item-wrapper"
       v-if="!!field.formItemFlag && (!field.options.hidden || designState === true)"
       :label="label"
       :label-width="labelWidth + 'px'"
@@ -28,7 +28,7 @@
               <el-tooltip :content="field.options.labelTooltip" effect="light">
                 <svg-icon :icon-class="field.options.labelIconClass" />
               </el-tooltip>
-              <span :style="{  color: labelFontColor, fontSize: labelFontSize + 'px' }">{{ label }}</span>
+              <span :style="{ color: labelFontColor, fontSize: labelFontSize + 'px' }">{{ label }}</span>
             </template>
             <template v-else>
               <svg-icon :icon-class="field.options.labelIconClass" /><span :style="{ color: labelFontColor, fontSize: labelFontSize + 'px' }">{{ label }}</span></template
@@ -45,7 +45,7 @@
             /></template>
           </template>
         </span>
-        <span v-else :style="{ color:labelFontColor, fontSize: labelFontSize + 'px' }">{{ label }}</span>
+        <span v-else :style="{ color: labelFontColor, fontSize: labelFontSize + 'px' }">{{ label }}</span>
       </template>
       <slot></slot>
     </el-form-item>
@@ -171,10 +171,7 @@ export default {
     },
   },
   created() {
-    console.log("  =====> this.labelFontSize:", this.labelFontSize);
-    console.log("  =====> this.field.options.labelFontSize:", this.field.options.labelFontSize);
-    console.log("  =====> this.formConfig.labelFontSize :", this.formConfig.labelFontSize);
-    //
+    
   },
   methods: {
     selectField(field) {

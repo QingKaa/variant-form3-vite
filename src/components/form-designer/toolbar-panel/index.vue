@@ -23,7 +23,8 @@
                icon-class="el-icon-arrow-right" @node-click="onNodeTreeClick"></el-tree>
     </el-drawer>
 
-    <div class="right-toolbar" :style="{width: toolbarWidth + 'px'}">
+    <!-- :style="{width: toolbarWidth + 'px'}" -->
+    <div class="right-toolbar" >
       <div class="right-toolbar-con">
         <el-button v-if="showToolButton('clearDesignerButton')" link type="primary" @click="clearFormWidget">
           <svg-icon icon-class="el-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
@@ -35,8 +36,8 @@
           {{i18nt('designer.toolbar.exportJson')}}</el-button>
         <el-button v-if="showToolButton('exportCodeButton')" link type="primary" @click="exportCode">
           {{i18nt('designer.toolbar.exportCode')}}</el-button>
-        <el-button v-if="showToolButton('generateSFCButton')" link type="primary" @click="generateSFC">
-          <svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button>
+        <!-- <el-button v-if="showToolButton('generateSFCButton')" link type="primary" @click="generateSFC">
+          <svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button> -->
         <template v-for="(idx, slotName) in $slots">
           <slot :name="slotName"></slot>
         </template>
@@ -750,7 +751,7 @@
 
     .right-toolbar-con {
       text-align: left;
-      width: 600px;
+      // width: 600px;
     }
 
     :deep(.el-button) {

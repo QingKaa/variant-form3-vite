@@ -69,7 +69,7 @@ if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时赋�
 }
 
 export default {
-  registerHelper,
+  // registerHelper,
   install,
   VFormDesigner,
   VFormRender
