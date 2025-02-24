@@ -8,10 +8,10 @@
       <el-button-group style="margin-left: 20px">
         <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
           {{i18nt('designer.toolbar.pcLayout')}}</el-button>
-        <el-button :type="layoutType === 'Pad' ? 'info': ''" @click="changeLayoutType('Pad')">
+        <!-- <el-button :type="layoutType === 'Pad' ? 'info': ''" @click="changeLayoutType('Pad')">
           {{i18nt('designer.toolbar.padLayout')}}</el-button>
         <el-button :type="layoutType === 'H5' ? 'info': ''" @click="changeLayoutType('H5')">
-          {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
+          {{i18nt('designer.toolbar.mobileLayout')}}</el-button> -->
       </el-button-group>
       <el-button style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
         <svg-icon icon-class="node-tree" /></el-button>
@@ -772,6 +772,9 @@
   }
 
   .small-padding-dialog {
+    .dialog-footer{
+      padding-bottom: 16px;
+    }
     :deep(.el-dialog__header) {
       //padding-top: 3px;
       //padding-bottom: 3px;
