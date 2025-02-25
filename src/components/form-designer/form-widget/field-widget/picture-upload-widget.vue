@@ -4,7 +4,7 @@
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
     <!-- el-upload增加:name="field.options.name"后，会导致又拍云上传失败！故删除之！！ -->
     <el-upload ref="fieldEditor" :disabled="field.options.disabled"
-               :action="realUploadURL" :headers="uploadHeaders" :data="uploadData"
+               :action="globalDsv.uploadUrl" :headers="globalDsv.uploadHeaders"
                :with-credentials="field.options.withCredentials"
                :multiple="field.options.multipleSelect" :file-list="fileList" :show-file-list="field.options.showFileList"
                list-type="picture-card" :class="{'hideUploadDiv': uploadBtnHidden}"
@@ -88,7 +88,7 @@
         type: String,
         default: ''
       },
-
+      
     },
     components: {
       FormItemWrapper,
@@ -113,6 +113,7 @@
         uploadBtnHidden: false,
 
         previewIndex: 1,  // 初始预览图像索引
+        globalDsv:{}
       }
     },
     computed: {
@@ -149,6 +150,7 @@
 
     mounted() {
       this.handleOnMounted()
+      this.globalDsv = this.getGlobalDsv()
     },
 
     beforeUnmount() {
@@ -228,12 +230,18 @@
       handlePictureUpload(res, file, fileList) {
         if (file.status === 'success') {
           let customResult = null
+          let defaultResult = null
           if (!!this.field.options.onUploadSuccess) {
             let customFn = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
             customResult = customFn.call(this, res, file, fileList)
+          }else {
+            defaultResult = {
+              name: file.name,
+              url: res.data.url,
+            }
           }
 
-          this.updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, res)
+          this.updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, defaultResult)
           this.fileList = deepClone(fileList)
           this.uploadBtnHidden = fileList.length >= this.field.options.limit
         }

@@ -8,7 +8,7 @@
               <el-option v-for="item in formSizes" :key="item.value" :label="item.label" :value="item.value"> </el-option>
             </el-select> -->
             <el-radio-group v-model="formConfig.size">
-              <el-radio-button v-for="item in formSizes" :key="item.value" :value="item.value"> {{ item.label }} </el-radio-button>
+              <el-radio-button v-for="item in formSizes" :key="item.value" :value="item.value"> {{ i18nt(item.label) }} </el-radio-button>
             </el-radio-group>
           </el-form-item>
 
@@ -174,11 +174,9 @@ export default {
       formActiveCollapseNames: ["1", "2"],
 
       formSizes: [
-        { label: "default", value: "" },
-        { label: "large", value: "large" },
-        //{label: 'medium', value: 'medium'},
-        { label: "small", value: "small" },
-        //{label: 'mini', value: 'mini'},
+        { label: "designer.setting.widgetSizeLarge", value: "large" },
+        { label: "designer.setting.widgetSizeDefault", value: "" },
+        { label: "designer.setting.widgetSizeSmall", value: "small" },
       ],
 
       showEditFormCssDialogFlag: false,

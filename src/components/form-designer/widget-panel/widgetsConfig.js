@@ -513,6 +513,7 @@ export const basicFields = [
       editable: false,
       format: "YYYY-MM-DD", //日期显示格式
       valueFormat: "YYYY-MM-DD", //日期对象格式
+      autoFullWidth: true,
       required: false,
       requiredHint: "",
       validation: "",
@@ -834,9 +835,9 @@ export const basicFields = [
       customRule: "",
       customRuleHint: "",
       //-------------------
-      uploadURL: "",
-      uploadTip: "",
-      withCredentials: false,
+      // uploadURL: "",
+      // uploadTip: "",
+      // withCredentials: false,
       multipleSelect: false,
       showFileList: true,
       limit: 3,
@@ -880,9 +881,9 @@ export const basicFields = [
       customRule: "",
       customRuleHint: "",
       //-------------------
-      uploadURL: "",
-      uploadTip: "",
-      withCredentials: false,
+      // uploadURL: "",
+      // uploadTip: "",
+      // withCredentials: false,
       multipleSelect: false,
       showFileList: true,
       limit: 3,

@@ -304,6 +304,7 @@ export default {
   :deep(.el-form-item__label) {
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: normal;
   }
 
   :deep(.el-form-item__content) {

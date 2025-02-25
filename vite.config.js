@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import viteSvgIcons from 'vite-plugin-svg-icons'
-import { resolve } from 'path'
-import commonjs from '@rollup/plugin-commonjs'
-import externalGlobals from "rollup-plugin-external-globals"
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import viteSvgIcons from "vite-plugin-svg-icons";
+import { resolve } from "path";
+import commonjs from "@rollup/plugin-commonjs";
+import externalGlobals from "rollup-plugin-external-globals";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '',
+  base: "",
   plugins: [
     vue(),
 
@@ -24,22 +24,21 @@ export default defineConfig({
 
     viteSvgIcons({
       // Specify the icon folder to be cached
-      iconDirs: [resolve(process.cwd(), 'src/icons/svg')],
+      iconDirs: [resolve(process.cwd(), "src/icons/svg")],
       // Specify symbolId format
-      symbolId: 'icon-[dir]-[name]',
+      symbolId: "icon-[dir]-[name]",
     }),
-
   ],
 
   resolve: {
     alias: {
-        "@": resolve(__dirname, 'src'), // 路径别名
+      "@": resolve(__dirname, "src"), // 路径别名
     },
-    extensions: ['.js', '.vue', '.json', '.ts'] // 使用路径别名时想要省略的后缀名，可以自己 增减
+    extensions: [".js", ".vue", ".json", ".ts"], // 使用路径别名时想要省略的后缀名，可以自己 增减
   },
 
   optimizeDeps: {
-    include: ['@/../lib/vuedraggable/dist/vuedraggable.umd.js', 'quill']
+    include: ["@/../lib/vuedraggable/dist/vuedraggable.umd.js", "quill"],
   },
 
   css: {
@@ -47,25 +46,25 @@ export default defineConfig({
       scss: {
         /* 自动引入全局scss文件 */
         // additionalData: '@use "src/styles/global.scss" as *;',
-        api: 'modern-compiler'
-      }
-    }
+        api: "modern-compiler",
+      },
+    },
   },
 
   build: {
     //minify: false,
     commonjsOptions: {
       exclude: [
-        'lib/vuedraggable/dist/vuedraggable.umd.js,',  //引号前的逗号不能删，不知何故？？
+        "lib/vuedraggable/dist/vuedraggable.umd.js,", //引号前的逗号不能删，不知何故？？
         //'vue/dist/*.js'
       ],
-      include: []
+      include: [],
       //requireReturnsDefault: true
     },
     rollupOptions: {
       // 指定生产打包入口文件为index.htm
       input: {
-        main: resolve(__dirname, 'index.html'),
+        main: resolve(__dirname, "index.html"),
       },
 
       // // 确保外部化处理那些你不想打包进库的依赖
@@ -77,7 +76,21 @@ export default defineConfig({
       //     'element-plus': 'ElementPlus',
       //   }
       // }
-    }
-  }
-
-})
+    },
+  },
+  server: {
+    host: true,
+    proxy: {
+      "/dev-api": {
+        target: "http://172.18.33.13:18909",
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/dev-api/, ""),
+      },
+      "/oss-api": {
+        target: "http://172.18.33.13:18909",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/oss-api/, ""),
+      },
+    },
+  },
+});

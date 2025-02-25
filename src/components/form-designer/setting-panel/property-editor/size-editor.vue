@@ -1,7 +1,7 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.widgetSize')">
     <el-radio-group v-model="optionModel.size">
-      <el-radio-button v-for="item in widgetSizes" :key="item.key" v-model="optionModel.size" :value="item.value">{{ item.label }}</el-radio-button>
+      <el-radio-button v-for="item in widgetSizes" :key="item.key" v-model="optionModel.size" :value="item.value">{{ i18nt(item.label) }}</el-radio-button>
     </el-radio-group>
   </el-form-item>
 </template>
@@ -20,11 +20,9 @@ export default {
   data() {
     return {
       widgetSizes: [
-        { label: "default", value: "" },
-        { label: "large", value: "large" },
-        //{label: 'medium', value: 'medium'},
-        { label: "small", value: "small" },
-        //{label: 'mini', value: 'mini'},
+        { label: "designer.setting.widgetSizeLarge", value: "large" },
+        { label: "designer.setting.widgetSizeDefault", value: "" },
+        { label: "designer.setting.widgetSizeSmall", value: "small" },
       ],
     };
   },

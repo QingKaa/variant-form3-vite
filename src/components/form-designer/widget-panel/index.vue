@@ -8,7 +8,7 @@
         </template>
         <el-scrollbar class="side-scroll-bar">
           <el-collapse v-model="activeNames" class="widget-collapse">
-            <el-collapse-item name="inner-widget" :title="i18nt('designer.containerTitle')">
+            <el-collapse-item name="base-widgets" :title="i18nt('designer.containerTitle')">
               <draggable
                 tag="ul"
                 :list="containers"
@@ -28,19 +28,37 @@
               </draggable>
             </el-collapse-item>
 
-            <el-collapse-item v-for="group in customWidgetGroups" :key="group.id" :name="group.id" :title="group.groupName">
-              <draggable tag="ul" :list="group.attributeList" item-key="id" :group="{ name: 'dragGroup', pull: 'clone', put: false }" :move="checkFieldMove" :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
-                <template #item="{ element: fld }">
-                  <li class="field-widget-item" :title="fld.attributeName" @dblclick="addFieldByDbClick(fld)">
-                    <span>
-                      <img v-if="fld.attributeImage" :src="fld.attributeImage" class="svg-icon" />
-                      <svg-icon v-else :icon-class="fld.icon" class-name="color-svg-icon" />
-                      {{ fld.attributeName }}
-                    </span>
-                  </li>
-                </template>
-              </draggable>
-            </el-collapse-item>
+            <template v-if="!isInnerWidgets">
+              <el-collapse-item v-for="group in customWidgetGroups" :key="group.id" :name="group.id" :title="group.groupName">
+                <draggable tag="ul" :list="group.attributeList" item-key="id" :group="{ name: 'dragGroup', pull: 'clone', put: false }" :move="checkFieldMove" :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
+                  <template #item="{ element: fld }">
+                    <li class="field-widget-item" :title="fld.attributeName" @dblclick="addFieldByDbClick(fld)">
+                      <span>
+                        <img v-if="fld.attributeImage" :src="fld.attributeImage" class="svg-icon" />
+                        <svg-icon v-else :icon-class="fld.icon" class-name="color-svg-icon" />
+                        {{ fld.attributeName }}
+                      </span>
+                    </li>
+                  </template>
+                </draggable>
+              </el-collapse-item>
+            </template>
+            <template v-else>
+              <el-collapse-item v-for="group in innerWidgetGroups" :key="group.id" :name="group.id" :title="group.groupName">
+                <draggable tag="ul" :list="group.attributeList" item-key="id" :group="{ name: 'dragGroup', pull: 'clone', put: false }" :move="checkFieldMove" :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
+                  <template #item="{ element: fld }">
+                    <li class="field-widget-item" :title="fld.attributeName" @dblclick="addFieldByDbClick(fld)">
+                      <span>
+                        <img v-if="fld.attributeImage" :src="fld.attributeImage" class="svg-icon" />
+                        <svg-icon v-else :icon-class="fld.icon" class-name="color-svg-icon" />
+                        {{ i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`) }}
+                      </span>
+                    </li>
+                  </template>
+                </draggable>
+                <div v-if="!group.attributeList || !group.attributeList.length" style="text-align: center;"> 暂无数据 </div>
+              </el-collapse-item>
+            </template>
           </el-collapse>
         </el-scrollbar>
       </el-tab-pane>
@@ -72,26 +90,12 @@
 </template>
 
 <script>
-import {
-  // advancedFields as AFS,
-  containers as CONS,
-  basicFields as BFS,
-  customFields as CFS,
-} from "./widgetsConfig";
+import { advancedFields as AFS, containers as CONS, basicFields as BFS, customFields as CFS } from "./widgetsConfig";
 import { formTemplates } from "./templatesConfig";
 import { addWindowResizeHandler, generateId } from "@/utils/util";
 import i18n from "@/utils/i18n";
 import axios from "axios";
 import SvgIcon from "@/components/svg-icon/index";
-
-// import ftImg1 from '@/assets/ft-images/t1.png'
-// import ftImg2 from '@/assets/ft-images/t2.png'
-// import ftImg3 from '@/assets/ft-images/t3.png'
-// import ftImg4 from '@/assets/ft-images/t4.png'
-// import ftImg5 from '@/assets/ft-images/t5.png'
-// import ftImg6 from '@/assets/ft-images/t6.png'
-// import ftImg7 from '@/assets/ft-images/t7.png'
-// import ftImg8 from '@/assets/ft-images/t8.png'
 
 export default {
   name: "FieldPanel",
@@ -105,6 +109,11 @@ export default {
       type: Array,
       default: () => [],
     },
+    // 是否启用默认组件, true 加载内置组件
+    isInnerWidgets: {
+      type: Boolean,
+      default: false,
+    },
   },
   inject: ["getBannedWidgets", "getDesignerConfig"],
   data() {
@@ -115,17 +124,17 @@ export default {
 
       scrollerHeight: "100%",
 
-      activeNames: ["inner-widget"],
+      activeNames: ["base-widgets"],
 
       containers: [],
 
       basicFields: [],
 
-      // customFields: [],
-
       formTemplates: formTemplates,
 
       customWidgetGroups: [],
+
+      innerWidgetGroups: [],
     };
   },
   computed: {
@@ -134,7 +143,7 @@ export default {
   watch: {
     customWidgets: {
       handler(v) {
-        console.log("  =====> v:", v);
+        if (this.isInnerWidgets) return;
         this.loadCustomWidgets();
       },
       deep: true,
@@ -143,13 +152,16 @@ export default {
   },
   created() {},
   mounted() {
-    this.loadWidgets();
+    // 加载基础组件
+    this.loadBaseWidgets();
+    // 加载内置组件
+    console.log("  =====> this.isInnerWidgets:", this.isInnerWidgets);
+    this.isInnerWidgets && this.loadInnerWidgets();
   },
   methods: {
     // 加载外部widgets
     loadCustomWidgets() {
       try {
-        console.log("  =====> this.customWidgets:", this.customWidgets);
         const list = this.customWidgets.reduce((ls, group) => {
           const { attributeList, groupName, id, sort } = group;
           if (!attributeList || !attributeList.length) return ls;
@@ -159,9 +171,9 @@ export default {
             if (!item) return ls;
             // 服务端定义的选项
             if (attrItem.sourceType === 2) {
-              item.options.optionItems = [...attrItem.attributeOptions || []];
+              item.options.optionItems = [...(attrItem.attributeOptions || [])];
             }
-            return ls.concat({ ...attrItem, attributeId:attrItem.id, displayName: attrItem.attributeName,...item });
+            return ls.concat({ ...attrItem, attributeId: attrItem.id, displayName: attrItem.attributeName, ...item });
           }, []);
 
           return ls.concat({
@@ -172,14 +184,85 @@ export default {
           });
         }, []);
         this.customWidgetGroups = list.sort((a, b) => a.sort - b.sort);
-        console.log("  =====> this.customWidgetGroups:", this.customWidgetGroups);
-        this.activeNames = ["inner-widget", ...list.map((it) => it.id)];
+        this.activeNames = ["base-widgets", ...list.map((it) => it.id)];
       } catch (error) {
         console.log("  =====> error:", error);
       }
     },
+
+    /**
+     * 加载默认组件
+     */
+    loadBaseWidgets() {
+      this.containers = CONS.map((con) => {
+        return {
+          key: generateId(),
+          ...con,
+          displayName: this.i18n2t(`designer.widgetLabel.${con.type}`, `extension.widgetLabel.${con.type}`),
+        };
+      }).filter((con) => {
+        return !con.internal && !this.isBanned(con.type);
+      });
+    },
+
+    /**
+     * 加载内置组件
+     */
+    loadInnerWidgets() {
+      const basicFields = BFS.map((fld) => {
+        return {
+          key: generateId(),
+          ...fld,
+          displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`),
+        };
+      }).filter((fld) => {
+        return !this.isBanned(fld.type);
+      });
+
+      const advancedFields = AFS.map((fld) => {
+        return {
+          key: generateId(),
+          ...fld,
+          displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`),
+        };
+      }).filter((fld) => {
+        return !this.isBanned(fld.type);
+      });
+
+      const customFields = CFS.map((fld) => {
+        return {
+          key: generateId(),
+          ...fld,
+          displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`),
+        };
+      }).filter((fld) => {
+        return !this.isBanned(fld.type);
+      });
+
+      this.innerWidgetGroups = [
+        {
+          groupName: this.i18nt("designer.basicFieldTitle"),
+          id: "base-widgets",
+          sort: 0,
+          attributeList: basicFields,
+        },
+        {
+          groupName: this.i18nt("designer.advancedFieldTitle"),
+          id: "advanced-widgets",
+          sort: 0,
+          attributeList: advancedFields,
+        },
+        {
+          groupName: this.i18nt("designer.customFieldTitle"),
+          id: "custom-widgets",
+          sort: 0,
+          attributeList: customFields,
+        },
+      ];
+    },
+
     getWidgetByType(attributeType) {
-      const widgetType = this.camelToKebabCase(attributeType)
+      const widgetType = this.camelToKebabCase(attributeType);
       return BFS.find((it) => {
         return widgetType === it.type && !this.isBanned(widgetType);
       });
@@ -187,10 +270,10 @@ export default {
 
     /**
      * 将 AttrValueType 转换成 attr-value-type
-     * @param str 
+     * @param str
      */
-    camelToKebabCase(str){
-      return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+    camelToKebabCase(str) {
+      return str.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
     },
 
     isBanned(wName) {
@@ -203,51 +286,6 @@ export default {
       }
 
       return !!this.designerConfig["formTemplates"];
-    },
-
-    loadWidgets() {
-      this.containers = CONS.map((con) => {
-        return {
-          key: generateId(),
-          ...con,
-          displayName: this.i18n2t(`designer.widgetLabel.${con.type}`, `extension.widgetLabel.${con.type}`),
-        };
-      }).filter((con) => {
-        return !con.internal && !this.isBanned(con.type);
-      });
-
-      // this.basicFields = BFS.map((fld) => {
-      //   return {
-      //     key: generateId(),
-      //     ...fld,
-      //     displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`),
-      //   };
-      // }).filter((fld) => {
-      //   return !this.isBanned(fld.type);
-      // });
-
-      // this.advancedFields = AFS.map((fld) => {
-      //   return {
-      //     key: generateId(),
-      //     ...fld,
-      //     displayName: this.i18n2t(
-      //       `designer.widgetLabel.${fld.type}`,
-      //       `extension.widgetLabel.${fld.type}`
-      //     ),
-      //   };
-      // }).filter((fld) => {
-      //   return !this.isBanned(fld.type);
-      // });
-
-      // this.customFields = CFS.map((fld) => {
-      //   return {
-      //     key: generateId(),
-      //     ...fld,
-      //     displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`),
-      //   };
-      // }).filter((fld) => {
-      //   return !this.isBanned(fld.type);
-      // });
     },
 
     handleContainerWidgetClone(origin) {

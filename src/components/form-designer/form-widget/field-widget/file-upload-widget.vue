@@ -5,7 +5,7 @@
     <!-- el-upload增加:name="field.options.name"后，会导致又拍云上传失败！故删除之！！ -->
     <el-upload ref="fieldEditor" :disabled="field.options.disabled"
                :style="styleVariables" class="dynamicPseudoAfter"
-               :action="realUploadURL" :headers="uploadHeaders" :data="uploadData"
+               :action="globalDsv.uploadUrl" :headers="globalDsv.uploadHeaders" 
                :with-credentials="field.options.withCredentials"
                :multiple="field.options.multipleSelect" :file-list="fileList"
                :show-file-list="field.options.showFileList" :class="{'hideUploadDiv': uploadBtnHidden}"
@@ -97,10 +97,14 @@
         styleVariables: {
           '--select-file-action': selectFileText,
         },
+        globalDsv:{}
       }
     },
     computed: {
       realUploadURL() {
+        const globalDsv = this.getGlobalDsv()
+        return globalDsv.uploadUrl || '/'
+
         let uploadURL = this.field.options.uploadURL
         // if (!!uploadURL && ((uploadURL.indexOf('DSV.') > -1) || (uploadURL.indexOf('DSV[') > -1))) {
         //   let DSV = this.getGlobalDsv()
@@ -129,6 +133,7 @@
 
     mounted() {
       this.handleOnMounted()
+      this.globalDsv = this.getGlobalDsv()
     },
 
     beforeUnmount() {
@@ -209,12 +214,19 @@
       handleFileUpload(res, file, fileList) {
         if (file.status === 'success') {
           let customResult = null
+          let defaultResult = null
           if (!!this.field.options.onUploadSuccess) {
             let mountFunc = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
             customResult = mountFunc.call(this, res, file, fileList)
+          }else {
+            defaultResult = {
+              name: file.name,
+              url: res.data.url,
+            }
           }
 
-          this.updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, res)
+          this.updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, defaultResult)
+
           if (!!customResult && !!customResult.name) {
             file.name = customResult.name
           } else {

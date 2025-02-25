@@ -10,8 +10,8 @@
 
 <template>
   <el-container class="designer-container">
-    <el-aside class="side-panel">
-      <widget-panel :designer="designer" :customWidgets="$attrs.customWidgets" />
+    <el-aside class="side-panel" style="width:300px;">
+      <widget-panel :designer="designer" :customWidgets="$attrs.customWidgets" :isInnerWidgets="$attrs.isInnerWidgets" />
     </el-aside>
 
     <el-container class="center-layout-container">
@@ -29,7 +29,7 @@
       </el-main>
     </el-container>
 
-    <el-aside>
+    <el-aside style="width:300px;">
       <setting-panel :designer="designer" :selected-widget="designer.selectedWidget" :form-config="designer.formConfig" :global-dsv="globalDsv" @edit-event-handler="testEEH" />
     </el-aside>
   </el-container>
@@ -133,7 +133,7 @@ export default {
     this.caseName = getQueryParam("case");
   },
   mounted() {
-    this.initLocale();
+    // this.initLocale();
   },
   methods: {
     testEEH(eventName, eventParams) {

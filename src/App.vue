@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- :customWidgets="customWidgets" -->
-    <v-form-designer ref="vfDesignerRef"  :designerConfig="designerConfig" :bannedWidgets="bannedWidgets" :global-dsv="globalDsv">
+    <v-form-designer ref="vfDesignerRef" :isInnerWidgets="true" :designerConfig="designerConfig" :bannedWidgets="bannedWidgets" :global-dsv="globalDsv">
       <template #toolbar-right>
         <el-button link type="primary" @click="doTest">保存</el-button>
       </template>
@@ -10,8 +10,6 @@
 </template>
 
 <script>
-// import VFormDesigner from "./components/form-designer/index.vue";
-
 export default {
   name: "App",
   components: {
@@ -21,8 +19,12 @@ export default {
     return {
       //全局数据源变量
       globalDsv: {
-        testApiHost: "http://www.test.com/api",
-        testPort: 8080,
+        uploadUrl: "/dev-api/api/oss-files/upload",
+        ossFileUrl:'/dev-api',
+        uploadHeaders: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkJlYXJlciJ9.eyJwcmltYXJ5c2lkIjoiMSIsInVuaXF1ZV9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3VzZXJkYXRhIjoie1wiSWRcIjpcIjFcIixcIk5hbWVcIjpcImFkbWluXCIsXCJBY2NvdW50XCI6XCJhZG1pblwiLFwiRGVwdElkXCI6XCJiYXNlb3JnXzAwMVwiLFwiTG9naW5UaW1lXCI6XCIyMDI1LTAyLTI0VDE2OjI3OjU3LjkwNjI3MjkrMDg6MDBcIixcIkdyYW50ZWRSb2xlQ29kZUxpc3RcIjpbXSxcIkdyYW50ZWRQZXJtaXNzaW9uTGlzdFwiOltdLFwiRXh0cmFJbmZvXCI6e30sXCJIYXNBZG1pblJvbGVcIjpmYWxzZX0iLCJBdWRpZW5jZSI6IlJTLldlYi5BcGkiLCJJc3N1ZXIiOiJSUy5XZWIuQXBpIiwibmJmIjoxNzQwMzg1Njc3LCJleHAiOjE3NDA0NzIwNzcsImlhdCI6MTc0MDM4NTY3NywiaXNzIjoiUlMuV2ViLkFwaSIsImF1ZCI6IlJTLldlYi5BcGkifQ.C8f5cEmLSWOEEq2qO-9wuMjqFaDuNnOwgVDcuQ2PxeA",
+        },
       },
 
       bannedWidgets: ["table", "rate", "html", "button", "rich-editor", "html-text"],
@@ -149,9 +151,7 @@ export default {
       ],
     };
   },
-  computed: {
-    //
-  },
+  computed: {},
   mounted() {},
   methods: {
     doTest() {
